@@ -533,5 +533,726 @@ func main() {
 			},
 			Order: 25,
 		},
+		{
+			ID:            "026",
+			Title:         "Channel Directions",
+			Description:   "Create functions with send-only and receive-only channel parameters",
+			Story:         "➡️ Channel directions enforce correct usage patterns!",
+			Difficulty:    models.DifficultyAdvanced,
+			Category:      models.CategoryConcurrency,
+			XPReward:      130,
+			RequiredLevel: 20,
+			Hints: []string{
+				"Send-only: chan<- type",
+				"Receive-only: <-chan type",
+				"Helps prevent misuse",
+			},
+			StarterCode: `package main
+
+import "fmt"
+
+func send(ch chan<- string) {
+	ch <- "message"
+}
+
+func receive(ch <-chan string) {
+	fmt.Println(<-ch)
+}
+
+func main() {
+	ch := make(chan string)
+	go send(ch)
+	receive(ch)
+}`,
+			Solution: `package main
+
+import "fmt"
+
+func send(ch chan<- string) {
+	ch <- "message"
+}
+
+func receive(ch <-chan string) {
+	fmt.Println(<-ch)
+}
+
+func main() {
+	ch := make(chan string)
+	go send(ch)
+	receive(ch)
+}`,
+			TestCases: []models.TestCase{
+				{
+					Input:          "",
+					ExpectedOutput: "message\n",
+					Description:    "Should use directional channels",
+					Hidden:         false,
+				},
+			},
+			Order: 26,
+		},
+		{
+			ID:            "027",
+			Title:         "Closing Channels",
+			Description:   "Close a channel and detect closure in receiver",
+			Story:         "🚪 Closing channels signals completion!",
+			Difficulty:    models.DifficultyAdvanced,
+			Category:      models.CategoryConcurrency,
+			XPReward:      120,
+			RequiredLevel: 21,
+			Hints: []string{
+				"Use close(ch) to close",
+				"val, ok := <-ch to check",
+				"ok is false when closed",
+			},
+			StarterCode: `package main
+
+import "fmt"
+
+func main() {
+	ch := make(chan int, 2)
+	ch <- 1
+	ch <- 2
+	close(ch)
+	
+	// TODO: Receive all values and print "closed" when done
+	
+}`,
+			Solution: `package main
+
+import "fmt"
+
+func main() {
+	ch := make(chan int, 2)
+	ch <- 1
+	ch <- 2
+	close(ch)
+	
+	for val := range ch {
+		fmt.Println(val)
+	}
+	fmt.Println("closed")
+}`,
+			TestCases: []models.TestCase{
+				{
+					Input:          "",
+					ExpectedOutput: "1\n2\nclosed\n",
+					Description:    "Should detect channel closure",
+					Hidden:         false,
+				},
+			},
+			Order: 27,
+		},
+		{
+			ID:            "028",
+			Title:         "sync.Once",
+			Description:   "Use sync.Once to ensure initialization happens only once",
+			Story:         "1️⃣ sync.Once guarantees single execution!",
+			Difficulty:    models.DifficultyAdvanced,
+			Category:      models.CategoryConcurrency,
+			XPReward:      140,
+			RequiredLevel: 22,
+			Hints: []string{
+				"var once sync.Once",
+				"once.Do(func() { ... })",
+				"Safe for concurrent calls",
+			},
+			StarterCode: `package main
+
+import (
+	"fmt"
+	"sync"
+)
+
+var count int
+var once sync.Once
+
+func initialize() {
+	count++
+	fmt.Println("initialized")
+}
+
+func main() {
+	var wg sync.WaitGroup
+	for i := 0; i < 3; i++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			once.Do(initialize)
+		}()
+	}
+	wg.Wait()
+	fmt.Println(count)
+}`,
+			Solution: `package main
+
+import (
+	"fmt"
+	"sync"
+)
+
+var count int
+var once sync.Once
+
+func initialize() {
+	count++
+	fmt.Println("initialized")
+}
+
+func main() {
+	var wg sync.WaitGroup
+	for i := 0; i < 3; i++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			once.Do(initialize)
+		}()
+	}
+	wg.Wait()
+	fmt.Println(count)
+}`,
+			TestCases: []models.TestCase{
+				{
+					Input:          "",
+					ExpectedOutput: "initialized\n1\n",
+					Description:    "Should initialize only once",
+					Hidden:         false,
+				},
+			},
+			Order: 28,
+		},
+		{
+			ID:            "029",
+			Title:         "RWMutex",
+			Description:   "Use sync.RWMutex for concurrent reads and exclusive writes",
+			Story:         "📖 RWMutex allows multiple readers or one writer!",
+			Difficulty:    models.DifficultyAdvanced,
+			Category:      models.CategoryConcurrency,
+			XPReward:      150,
+			RequiredLevel: 23,
+			Hints: []string{
+				"RLock() for reading",
+				"Lock() for writing",
+				"Multiple readers can proceed",
+			},
+			StarterCode: `package main
+
+import (
+	"fmt"
+	"sync"
+)
+
+type SafeCounter struct {
+	mu sync.RWMutex
+	v  int
+}
+
+func (c *SafeCounter) Inc() {
+	c.mu.Lock()
+	c.v++
+	c.mu.Unlock()
+}
+
+func (c *SafeCounter) Value() int {
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	return c.v
+}
+
+func main() {
+	c := SafeCounter{}
+	c.Inc()
+	c.Inc()
+	fmt.Println(c.Value())
+}`,
+			Solution: `package main
+
+import (
+	"fmt"
+	"sync"
+)
+
+type SafeCounter struct {
+	mu sync.RWMutex
+	v  int
+}
+
+func (c *SafeCounter) Inc() {
+	c.mu.Lock()
+	c.v++
+	c.mu.Unlock()
+}
+
+func (c *SafeCounter) Value() int {
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	return c.v
+}
+
+func main() {
+	c := SafeCounter{}
+	c.Inc()
+	c.Inc()
+	fmt.Println(c.Value())
+}`,
+			TestCases: []models.TestCase{
+				{
+					Input:          "",
+					ExpectedOutput: "2\n",
+					Description:    "Should safely increment",
+					Hidden:         false,
+				},
+			},
+			Order: 29,
+		},
+		{
+			ID:            "030",
+			Title:         "Atomic Operations",
+			Description:   "Use sync/atomic for lock-free counter",
+			Story:         "⚛️ Atomic operations are faster than mutexes!",
+			Difficulty:    models.DifficultyAdvanced,
+			Category:      models.CategoryConcurrency,
+			XPReward:      160,
+			RequiredLevel: 24,
+			Hints: []string{
+				"Use atomic.AddInt64",
+				"Use atomic.LoadInt64",
+				"No locks needed",
+			},
+			StarterCode: `package main
+
+import (
+	"fmt"
+	"sync"
+	"sync/atomic"
+)
+
+func main() {
+	var counter int64
+	var wg sync.WaitGroup
+	
+	for i := 0; i < 10; i++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			atomic.AddInt64(&counter, 1)
+		}()
+	}
+	
+	wg.Wait()
+	fmt.Println(atomic.LoadInt64(&counter))
+}`,
+			Solution: `package main
+
+import (
+	"fmt"
+	"sync"
+	"sync/atomic"
+)
+
+func main() {
+	var counter int64
+	var wg sync.WaitGroup
+	
+	for i := 0; i < 10; i++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			atomic.AddInt64(&counter, 1)
+		}()
+	}
+	
+	wg.Wait()
+	fmt.Println(atomic.LoadInt64(&counter))
+}`,
+			TestCases: []models.TestCase{
+				{
+					Input:          "",
+					ExpectedOutput: "10\n",
+					Description:    "Should atomically increment",
+					Hidden:         false,
+				},
+			},
+			Order: 30,
+		},
+		{
+			ID:            "031",
+			Title:         "Fan-Out Pattern",
+			Description:   "Distribute work across multiple workers (fan-out)",
+			Story:         "📤 Fan-out distributes work for parallel processing!",
+			Difficulty:    models.DifficultyAdvanced,
+			Category:      models.CategoryConcurrency,
+			XPReward:      170,
+			RequiredLevel: 25,
+			Hints: []string{
+				"Send jobs to multiple workers",
+				"Each worker processes independently",
+				"Collect results from all",
+			},
+			StarterCode: `package main
+
+import (
+	"fmt"
+	"sync"
+)
+
+func worker(id int, jobs <-chan int, results chan<- int, wg *sync.WaitGroup) {
+	defer wg.Done()
+	for job := range jobs {
+		results <- job * 2
+	}
+}
+
+func main() {
+	jobs := make(chan int, 5)
+	results := make(chan int, 5)
+	var wg sync.WaitGroup
+	
+	// Start 3 workers
+	for w := 1; w <= 3; w++ {
+		wg.Add(1)
+		go worker(w, jobs, results, &wg)
+	}
+	
+	// Send jobs
+	for j := 1; j <= 5; j++ {
+		jobs <- j
+	}
+	close(jobs)
+	
+	wg.Wait()
+	close(results)
+	
+	sum := 0
+	for r := range results {
+		sum += r
+	}
+	fmt.Println(sum)
+}`,
+			Solution: `package main
+
+import (
+	"fmt"
+	"sync"
+)
+
+func worker(id int, jobs <-chan int, results chan<- int, wg *sync.WaitGroup) {
+	defer wg.Done()
+	for job := range jobs {
+		results <- job * 2
+	}
+}
+
+func main() {
+	jobs := make(chan int, 5)
+	results := make(chan int, 5)
+	var wg sync.WaitGroup
+	
+	for w := 1; w <= 3; w++ {
+		wg.Add(1)
+		go worker(w, jobs, results, &wg)
+	}
+	
+	for j := 1; j <= 5; j++ {
+		jobs <- j
+	}
+	close(jobs)
+	
+	wg.Wait()
+	close(results)
+	
+	sum := 0
+	for r := range results {
+		sum += r
+	}
+	fmt.Println(sum)
+}`,
+			TestCases: []models.TestCase{
+				{
+					Input:          "",
+					ExpectedOutput: "30\n",
+					Description:    "Sum of doubled values (2+4+6+8+10)",
+					Hidden:         false,
+				},
+			},
+			Order: 31,
+		},
+		{
+			ID:            "032",
+			Title:         "Pipeline Pattern",
+			Description:   "Create a pipeline with generator, squarer, and printer stages",
+			Story:         "🔗 Pipelines chain operations for data processing!",
+			Difficulty:    models.DifficultyAdvanced,
+			Category:      models.CategoryConcurrency,
+			XPReward:      180,
+			RequiredLevel: 26,
+			Hints: []string{
+				"Each stage is a function returning channel",
+				"Connect stages: gen() -> square() -> print()",
+				"Data flows through pipeline",
+			},
+			StarterCode: `package main
+
+import "fmt"
+
+func gen(nums ...int) <-chan int {
+	out := make(chan int)
+	go func() {
+		for _, n := range nums {
+			out <- n
+		}
+		close(out)
+	}()
+	return out
+}
+
+func square(in <-chan int) <-chan int {
+	out := make(chan int)
+	go func() {
+		for n := range in {
+			out <- n * n
+		}
+		close(out)
+	}()
+	return out
+}
+
+func main() {
+	for n := range square(gen(1, 2, 3)) {
+		fmt.Println(n)
+	}
+}`,
+			Solution: `package main
+
+import "fmt"
+
+func gen(nums ...int) <-chan int {
+	out := make(chan int)
+	go func() {
+		for _, n := range nums {
+			out <- n
+		}
+		close(out)
+	}()
+	return out
+}
+
+func square(in <-chan int) <-chan int {
+	out := make(chan int)
+	go func() {
+		for n := range in {
+			out <- n * n
+		}
+		close(out)
+	}()
+	return out
+}
+
+func main() {
+	for n := range square(gen(1, 2, 3)) {
+		fmt.Println(n)
+	}
+}`,
+			TestCases: []models.TestCase{
+				{
+					Input:          "",
+					ExpectedOutput: "1\n4\n9\n",
+					Description:    "Should square numbers",
+					Hidden:         false,
+				},
+			},
+			Order: 32,
+		},
+		{
+			ID:            "033",
+			Title:         "Rate Limiting",
+			Description:   "Implement rate limiting using time.Ticker",
+			Story:         "⏱️ Rate limiting controls request frequency!",
+			Difficulty:    models.DifficultyAdvanced,
+			Category:      models.CategoryConcurrency,
+			XPReward:      170,
+			RequiredLevel: 27,
+			Hints: []string{
+				"Use time.NewTicker",
+				"Receive from ticker.C",
+				"Limits operations per second",
+			},
+			StarterCode: `package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+	requests := make(chan int, 5)
+	for i := 1; i <= 5; i++ {
+		requests <- i
+	}
+	close(requests)
+	
+	limiter := time.NewTicker(200 * time.Millisecond)
+	defer limiter.Stop()
+	
+	for req := range requests {
+		<-limiter.C
+		fmt.Println(req)
+	}
+}`,
+			Solution: `package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+	requests := make(chan int, 5)
+	for i := 1; i <= 5; i++ {
+		requests <- i
+	}
+	close(requests)
+	
+	limiter := time.NewTicker(200 * time.Millisecond)
+	defer limiter.Stop()
+	
+	for req := range requests {
+		<-limiter.C
+		fmt.Println(req)
+	}
+}`,
+			TestCases: []models.TestCase{
+				{
+					Input:          "",
+					ExpectedOutput: "1\n2\n3\n4\n5\n",
+					Description:    "Should rate limit requests",
+					Hidden:         false,
+				},
+			},
+			Order: 33,
+		},
+		{
+			ID:            "034",
+			Title:         "Timeout Pattern",
+			Description:   "Implement timeout using select and time.After",
+			Story:         "⏰ Timeouts prevent indefinite waiting!",
+			Difficulty:    models.DifficultyAdvanced,
+			Category:      models.CategoryConcurrency,
+			XPReward:      160,
+			RequiredLevel: 28,
+			Hints: []string{
+				"Use time.After in select",
+				"Returns channel that fires after duration",
+				"Print timeout if triggered",
+			},
+			StarterCode: `package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+	ch := make(chan string)
+	
+	go func() {
+		time.Sleep(2 * time.Second)
+		ch <- "result"
+	}()
+	
+	select {
+	case res := <-ch:
+		fmt.Println(res)
+	case <-time.After(1 * time.Second):
+		fmt.Println("timeout")
+	}
+}`,
+			Solution: `package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+	ch := make(chan string)
+	
+	go func() {
+		time.Sleep(2 * time.Second)
+		ch <- "result"
+	}()
+	
+	select {
+	case res := <-ch:
+		fmt.Println(res)
+	case <-time.After(1 * time.Second):
+		fmt.Println("timeout")
+	}
+}`,
+			TestCases: []models.TestCase{
+				{
+					Input:          "",
+					ExpectedOutput: "timeout\n",
+					Description:    "Should timeout after 1 second",
+					Hidden:         false,
+				},
+			},
+			Order: 34,
+		},
+		{
+			ID:            "035",
+			Title:         "HTTP Server Basics",
+			Description:   "Create a simple HTTP server that responds with \"Hello World\"",
+			Story:         "🌐 HTTP servers are the foundation of web services!",
+			Difficulty:    models.DifficultyAdvanced,
+			Category:      models.CategoryConcurrency,
+			XPReward:      190,
+			RequiredLevel: 29,
+			Hints: []string{
+				"Use http.HandleFunc",
+				"Use http.ListenAndServe",
+				"Handler writes to ResponseWriter",
+			},
+			StarterCode: `package main
+
+import (
+	"fmt"
+	"net/http"
+)
+
+func handler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Hello World")
+}
+
+func main() {
+	http.HandleFunc("/", handler)
+	fmt.Println("Server ready")
+	// Server would run here in real app
+}`,
+			Solution: `package main
+
+import (
+	"fmt"
+	"net/http"
+)
+
+func handler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Hello World")
+}
+
+func main() {
+	http.HandleFunc("/", handler)
+	fmt.Println("Server ready")
+}`,
+			TestCases: []models.TestCase{
+				{
+					Input:          "",
+					ExpectedOutput: "Server ready\n",
+					Description:    "Should setup server",
+					Hidden:         false,
+				},
+			},
+			Order: 35,
+		},
 	}
 }
