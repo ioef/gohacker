@@ -166,10 +166,16 @@ func (e *Engine) ExecuteChallenge(userID, challengeID, code string) (*ExecutionR
 
 	// If all tests passed, update progress
 	if allTestsPassed {
+		// Always show XP reward
+		result.XPGained = challenge.XPReward
+
+		// Award XP only if first completion
 		if err := e.CompleteChallenge(userID, challengeID); err != nil {
 			return nil, err
 		}
-		result.XPGained = challenge.XPReward
+
+		// Reload user to get updated level
+		user, _ = e.store.GetUserByID(userID)
 		result.NewLevel = user.Level
 	}
 

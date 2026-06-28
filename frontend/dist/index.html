@@ -434,14 +434,19 @@
                 const result = await response.json();
                 console.log('Execution result:', result);
                 
+                // Update code editor with formatted code if available
+                if (result.formatted_code) {
+                    document.getElementById('code-input').value = result.formatted_code;
+                }
+                
                 let html = '';
                 if (result.success) {
                     html = `
                         <div class="message success">
                             <h3>✅ Success!</h3>
                             <p>${result.message || 'Challenge completed!'}</p>
-                            <p><strong>XP Earned:</strong> ${result.xp_earned || 0}</p>
-                            ${result.level_up ? '<p><strong>🎉 LEVEL UP!</strong></p>' : ''}
+                            <p><strong>XP Earned:</strong> ${result.xp_gained || 0}</p>
+                            ${result.new_level ? '<p><strong>🎉 LEVEL UP! Now Level ' + result.new_level + '</strong></p>' : ''}
                             ${result.achievements_unlocked && result.achievements_unlocked.length > 0 ? 
                                 '<p><strong>🏆 Achievements Unlocked:</strong> ' + result.achievements_unlocked.join(', ') + '</p>' : ''}
                             ${result.output ? '<pre style="margin-top: 10px; background: #1a1f3a; padding: 10px; border-radius: 5px;">' + result.output + '</pre>' : ''}
