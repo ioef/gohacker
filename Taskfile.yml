@@ -82,13 +82,12 @@ tasks:
       - npm run lint || echo "⚠️  Lint script not configured"
 
   frontend:clean:
-    desc: Clean frontend build artifacts and restore index.html from git
+    desc: Clean frontend build artifacts (preserves index.html)
     dir: "{{.FRONTEND_DIR}}"
     cmds:
-      - rm -rf dist/
+      - find dist/ -type f ! -name 'index.html' -delete 2>/dev/null || true
+      - find dist/ -type d -empty -delete 2>/dev/null || true
       - rm -rf node_modules/
-      - mkdir -p dist
-      - git checkout HEAD -- dist/index.html 2>/dev/null || echo "✅ index.html restored from git"
 
   # Combined tasks
   build:
