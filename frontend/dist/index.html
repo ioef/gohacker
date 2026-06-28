@@ -116,6 +116,28 @@
             font-size: 0.8em;
             font-weight: bold;
         }
+        .challenge-card.locked {
+            background: rgba(255, 0, 110, 0.05);
+            border-color: #ff006e66;
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .challenge-card.locked::after {
+            content: '🔒 LOCKED';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff006e;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        .challenge-card.locked:hover {
+            transform: none;
+            box-shadow: none;
+        }
         .challenge-card h3 { color: #00d9ff; margin-bottom: 10px; }
         .difficulty {
             display: inline-block;
@@ -300,16 +322,23 @@
                     return;
                 }
                 
-                const listHtml = challenges.map(c => `
-                    <div class="challenge-card ${c.completed ? 'completed' : ''}" onclick="loadChallenge('${c.id}')">
-                        <h3>${c.title}</h3>
-                        <p>${c.description}</p>
-                        <span class="difficulty ${c.difficulty}">${c.difficulty.toUpperCase()}</span>
-                        <div style="margin-top: 10px; color: #00d9ff;">
-                            XP: ${c.xp_reward} | Category: ${c.category}
+                const listHtml = challenges.map(c => {
+                    const statusClass = c.locked ? 'locked' : (c.completed ? 'completed' : '');
+                    const onClick = c.locked ? '' : `onclick="loadChallenge('${c.id}')"`;
+                    const requiredLevel = c.locked ? `<div style="margin-top: 10px; color: #ff006e;">🔒 Requires Level ${c.required_level}</div>` : '';
+                    
+                    return `
+                        <div class="challenge-card ${statusClass}" ${onClick}>
+                            <h3>${c.title}</h3>
+                            <p>${c.description}</p>
+                            <span class="difficulty ${c.difficulty}">${c.difficulty.toUpperCase()}</span>
+                            <div style="margin-top: 10px; color: #00d9ff;">
+                                XP: ${c.xp_reward} | Category: ${c.category}
+                            </div>
+                            ${requiredLevel}
                         </div>
-                    </div>
-                `).join('');
+                    `;
+                }).join('');
                 
                 document.getElementById('challenge-list').innerHTML = listHtml;
                 
