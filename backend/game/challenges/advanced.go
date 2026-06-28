@@ -13,7 +13,7 @@ func GetAdvancedChallenges() []models.Challenge {
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,
 			XPReward:      100,
-			RequiredLevel: 15,
+			RequiredLevel: 10,
 			Hints: []string{
 				"Use 'go' keyword to start goroutine",
 				"Use time.Sleep to wait for goroutine",
@@ -67,7 +67,7 @@ func main() {
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,
 			XPReward:      120,
-			RequiredLevel: 16,
+			RequiredLevel: 10,
 			Hints: []string{
 				"Create channel: ch := make(chan string)",
 				"Send: ch <- \"message\"",
@@ -112,7 +112,7 @@ func main() {
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,
 			XPReward:      130,
-			RequiredLevel: 18,
+			RequiredLevel: 10,
 			Hints: []string{
 				"Create: var wg sync.WaitGroup",
 				"Add: wg.Add(1) before goroutine",
@@ -174,7 +174,7 @@ func main() {
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,
 			XPReward:      120,
-			RequiredLevel: 16,
+			RequiredLevel: 10,
 			Hints: []string{
 				"Create buffered channel: ch := make(chan int, 2)",
 				"Send values without blocking: ch <- 1",
@@ -218,7 +218,7 @@ func main() {
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,
 			XPReward:      130,
-			RequiredLevel: 17,
+			RequiredLevel: 10,
 			Hints: []string{
 				"Use select { case val := <-ch1: ... case val := <-ch2: ... }",
 				"Select picks the first ready channel",
@@ -295,7 +295,7 @@ func main() {
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,
 			XPReward:      140,
-			RequiredLevel: 18,
+			RequiredLevel: 10,
 			Hints: []string{
 				"Import sync package",
 				"Use sync.Mutex with Lock() and Unlock()",
@@ -368,7 +368,7 @@ func main() {
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,
 			XPReward:      150,
-			RequiredLevel: 19,
+			RequiredLevel: 10,
 			Hints: []string{
 				"Create jobs channel and results channel",
 				"Start multiple worker goroutines",
@@ -463,7 +463,7 @@ func main() {
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,
 			XPReward:      160,
-			RequiredLevel: 20,
+			RequiredLevel: 10,
 			Hints: []string{
 				"Import context package",
 				"Use context.WithCancel()",
@@ -541,7 +541,7 @@ func main() {
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,
 			XPReward:      130,
-			RequiredLevel: 20,
+			RequiredLevel: 10,
 			Hints: []string{
 				"Send-only: chan<- type",
 				"Receive-only: <-chan type",
@@ -599,7 +599,7 @@ func main() {
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,
 			XPReward:      120,
-			RequiredLevel: 21,
+			RequiredLevel: 10,
 			Hints: []string{
 				"Use close(ch) to close",
 				"val, ok := <-ch to check",
@@ -651,7 +651,7 @@ func main() {
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,
 			XPReward:      140,
-			RequiredLevel: 22,
+			RequiredLevel: 10,
 			Hints: []string{
 				"var once sync.Once",
 				"once.Do(func() { ... })",
@@ -729,7 +729,7 @@ func main() {
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,
 			XPReward:      150,
-			RequiredLevel: 23,
+			RequiredLevel: 10,
 			Hints: []string{
 				"RLock() for reading",
 				"Lock() for writing",
@@ -813,7 +813,7 @@ func main() {
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,
 			XPReward:      160,
-			RequiredLevel: 24,
+			RequiredLevel: 10,
 			Hints: []string{
 				"Use atomic.AddInt64",
 				"Use atomic.LoadInt64",
@@ -883,7 +883,7 @@ func main() {
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,
 			XPReward:      170,
-			RequiredLevel: 25,
+			RequiredLevel: 10,
 			Hints: []string{
 				"Send jobs to multiple workers",
 				"Each worker processes independently",
@@ -985,7 +985,7 @@ func main() {
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,
 			XPReward:      180,
-			RequiredLevel: 26,
+			RequiredLevel: 10,
 			Hints: []string{
 				"Each stage is a function returning channel",
 				"Connect stages: gen() -> square() -> print()",
@@ -1071,7 +1071,7 @@ func main() {
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,
 			XPReward:      170,
-			RequiredLevel: 27,
+			RequiredLevel: 10,
 			Hints: []string{
 				"Use time.NewTicker",
 				"Receive from ticker.C",
@@ -1139,7 +1139,7 @@ func main() {
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,
 			XPReward:      160,
-			RequiredLevel: 28,
+			RequiredLevel: 10,
 			Hints: []string{
 				"Use time.After in select",
 				"Returns channel that fires after duration",
@@ -1207,7 +1207,7 @@ func main() {
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,
 			XPReward:      190,
-			RequiredLevel: 29,
+			RequiredLevel: 10,
 			Hints: []string{
 				"Use http.HandleFunc",
 				"Use http.ListenAndServe",
@@ -1262,7 +1262,7 @@ func main() {
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,
 			XPReward:      200,
-			RequiredLevel: 30,
+			RequiredLevel: 10,
 			StarterCode: `package main
 import ("fmt"; "net/http"; "io")
 func main() {
@@ -1290,7 +1290,7 @@ func main() {
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,
 			XPReward:      210,
-			RequiredLevel: 31,
+			RequiredLevel: 10,
 			StarterCode: `package main
 import "fmt"
 type Response struct { Status string }
@@ -1316,7 +1316,7 @@ func main() {
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,
 			XPReward:      220,
-			RequiredLevel: 32,
+			RequiredLevel: 10,
 			StarterCode: `package main
 import ("fmt"; "net/http")
 func logger(next http.HandlerFunc) http.HandlerFunc {
@@ -1358,7 +1358,7 @@ func main() {
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,
 			XPReward:      200,
-			RequiredLevel: 33,
+			RequiredLevel: 10,
 			StarterCode: `package main
 import "fmt"
 func add(a, b int) int { return a + b }
@@ -1398,7 +1398,7 @@ func main() {
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,
 			XPReward:      210,
-			RequiredLevel: 34,
+			RequiredLevel: 10,
 			StarterCode: `package main
 import "fmt"
 func fibonacci(n int) int {
@@ -1428,7 +1428,7 @@ func main() {
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,
 			XPReward:      220,
-			RequiredLevel: 35,
+			RequiredLevel: 10,
 			StarterCode: `package main
 import ("context"; "fmt"; "time")
 func main() {
@@ -1464,7 +1464,7 @@ func main() {
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,
 			XPReward:      250,
-			RequiredLevel: 36,
+			RequiredLevel: 10,
 			StarterCode: `package main
 import ("context"; "fmt"; "net/http"; "time")
 func main() {

@@ -134,13 +134,13 @@ func main() {
 		},
 		{
 			ID:            "004",
-			Title:         "Loops: For Loop Basics",
-			Description:   "Use a for loop to print numbers from 1 to 5",
-			Story:         "🔄 Automation is key! Learn to repeat actions with loops.",
+			Title:         "If Statements",
+			Description:   "Use an if statement to check if a number is positive",
+			Story:         "🔍 Decision time! Make your code smart with conditionals.",
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      25,
-			RequiredLevel: 2,
+			RequiredLevel: 1,
 			Hints: []string{
 				"Use a for loop with initialization, condition, and increment",
 				"for i := 1; i <= 5; i++ { ... }",
@@ -181,7 +181,7 @@ func main() {
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      30,
-			RequiredLevel: 2,
+			RequiredLevel: 1,
 			Hints: []string{
 				"Define a function with: func greet(name string) string { ... }",
 				"Use fmt.Sprintf to format the string",
@@ -227,7 +227,7 @@ func main() {
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      20,
-			RequiredLevel: 3,
+			RequiredLevel: 1,
 			Hints: []string{
 				"Declare an array: var arr [3]string",
 				"Assign values: arr[0] = \"first\"",
@@ -267,7 +267,7 @@ func main() {
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      25,
-			RequiredLevel: 3,
+			RequiredLevel: 1,
 			Hints: []string{
 				"Create a slice: numbers := []int{}",
 				"Use append: numbers = append(numbers, 10)",
@@ -310,7 +310,7 @@ func main() {
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      30,
-			RequiredLevel: 4,
+			RequiredLevel: 1,
 			Hints: []string{
 				"Create a map: data := make(map[string]int)",
 				"Add entry: data[\"score\"] = 100",
@@ -351,7 +351,7 @@ func main() {
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      20,
-			RequiredLevel: 4,
+			RequiredLevel: 1,
 			Hints: []string{
 				"Import the strings package",
 				"Use strings.ToUpper()",
@@ -398,7 +398,7 @@ func main() {
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      35,
-			RequiredLevel: 5,
+			RequiredLevel: 1,
 			Hints: []string{
 				"Function signature: func divide(a, b int) (int, int)",
 				"Return two values: return a/b, a%b",
@@ -444,7 +444,7 @@ func main() {
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      25,
-			RequiredLevel: 5,
+			RequiredLevel: 1,
 			Hints: []string{
 				"Use for i, value := range slice",
 				"Print each value",
@@ -487,7 +487,7 @@ func main() {
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      30,
-			RequiredLevel: 5,
+			RequiredLevel: 1,
 			Hints: []string{
 				"Use switch day { case 1: ... case 2: ... }",
 				"Day 3 should print \"Wednesday\"",
@@ -541,7 +541,7 @@ func main() {
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      35,
-			RequiredLevel: 6,
+			RequiredLevel: 1,
 			Hints: []string{
 				"Use ...int for variadic parameter",
 				"func sum(numbers ...int) int",
@@ -591,7 +591,7 @@ func main() {
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      25,
-			RequiredLevel: 6,
+			RequiredLevel: 1,
 			Hints: []string{
 				"Use fmt.Sprintf with %s for strings and %d for integers",
 				"Format: \"Name: %s, Age: %d\"",
@@ -635,7 +635,7 @@ func main() {
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      20,
-			RequiredLevel: 6,
+			RequiredLevel: 1,
 			Hints: []string{
 				"Use int() to convert float to int",
 				"value := 3.14",
@@ -677,7 +677,7 @@ func main() {
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      15,
-			RequiredLevel: 7,
+			RequiredLevel: 1,
 			Hints: []string{
 				"Use const keyword",
 				"const PI = 3.14159",
@@ -717,7 +717,7 @@ func main() {
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      30,
-			RequiredLevel: 7,
+			RequiredLevel: 1,
 			Hints: []string{
 				"const ( Sunday = iota; Monday; Tuesday )",
 				"iota starts at 0 and increments",
@@ -762,7 +762,7 @@ func main() {
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      20,
-			RequiredLevel: 7,
+			RequiredLevel: 1,
 			Hints: []string{
 				"Use && for AND operation",
 				"Check num >= 10 && num <= 20",
@@ -804,7 +804,7 @@ func main() {
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      25,
-			RequiredLevel: 8,
+			RequiredLevel: 1,
 			Hints: []string{
 				"Use for loop from 1 to 10",
 				"if i == 5 { break }",
@@ -848,7 +848,7 @@ func main() {
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      25,
-			RequiredLevel: 8,
+			RequiredLevel: 1,
 			Hints: []string{
 				"Use for loop 1 to 5",
 				"if i == 3 { continue }",
@@ -892,7 +892,7 @@ func main() {
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      35,
-			RequiredLevel: 8,
+			RequiredLevel: 1,
 			Hints: []string{
 				"func calc(w, h int) (area, perimeter int)",
 				"Assign to area and perimeter directly",
@@ -940,7 +940,7 @@ func main() {
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      30,
-			RequiredLevel: 9,
+			RequiredLevel: 1,
 			Hints: []string{
 				"func() { ... }()",
 				"Define and call in one expression",
@@ -981,7 +981,7 @@ func main() {
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      40,
-			RequiredLevel: 9,
+			RequiredLevel: 1,
 			Hints: []string{
 				"Base case: if n == 0 return 1",
 				"Recursive case: return n * factorial(n-1)",
@@ -1030,7 +1030,7 @@ func main() {
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      30,
-			RequiredLevel: 10,
+			RequiredLevel: 1,
 			Hints: []string{
 				"Use make([]int, length, capacity)",
 				"len() returns length",
@@ -1070,7 +1070,7 @@ func main() {
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      30,
-			RequiredLevel: 10,
+			RequiredLevel: 1,
 			Hints: []string{
 				"Use copy(dst, src)",
 				"Create destination slice with make",
@@ -1113,7 +1113,7 @@ func main() {
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      30,
-			RequiredLevel: 11,
+			RequiredLevel: 1,
 			StarterCode: `package main
 import "fmt"
 func main() {
@@ -1136,7 +1136,7 @@ func main() {
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      35,
-			RequiredLevel: 11,
+			RequiredLevel: 1,
 			StarterCode: `package main
 import "fmt"
 func main() {
@@ -1160,7 +1160,7 @@ func main() {
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      40,
-			RequiredLevel: 12,
+			RequiredLevel: 1,
 			StarterCode: `package main
 import "fmt"
 type Person struct { Name string }
@@ -1188,7 +1188,7 @@ func main() {
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      20,
-			RequiredLevel: 12,
+			RequiredLevel: 1,
 			StarterCode: `package main
 import "fmt"
 func main() {
@@ -1212,7 +1212,7 @@ func main() {
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      25,
-			RequiredLevel: 13,
+			RequiredLevel: 1,
 			StarterCode: `package main
 import ("fmt"; "strings")
 func main() {
@@ -1236,7 +1236,7 @@ func main() {
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      35,
-			RequiredLevel: 13,
+			RequiredLevel: 1,
 			StarterCode: `package main
 import ("fmt"; "strings")
 func main() {
@@ -1262,7 +1262,7 @@ func main() {
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      20,
-			RequiredLevel: 14,
+			RequiredLevel: 1,
 			StarterCode: `package main
 import "fmt"
 func main() {
@@ -1286,7 +1286,7 @@ func main() {
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      25,
-			RequiredLevel: 14,
+			RequiredLevel: 1,
 			StarterCode: `package main
 import "fmt"
 func main() {
@@ -1312,7 +1312,7 @@ func main() {
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      30,
-			RequiredLevel: 15,
+			RequiredLevel: 1,
 			StarterCode: `package main
 import "fmt"
 func main() {
@@ -1339,7 +1339,7 @@ func main() {
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      25,
-			RequiredLevel: 15,
+			RequiredLevel: 1,
 			StarterCode: `package main
 import "fmt"
 func main() {
@@ -1363,7 +1363,7 @@ func main() {
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      30,
-			RequiredLevel: 16,
+			RequiredLevel: 1,
 			StarterCode: `package main
 import "fmt"
 func check(n int) string {
@@ -1389,7 +1389,7 @@ func main() { fmt.Println(check(5)) }`,
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      35,
-			RequiredLevel: 16,
+			RequiredLevel: 1,
 			StarterCode: `package main
 import "fmt"
 func main() {
@@ -1413,7 +1413,7 @@ func main() {
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      40,
-			RequiredLevel: 17,
+			RequiredLevel: 1,
 			StarterCode: `package main
 import "fmt"
 func apply(f func(int) int, v int) int { return f(v) }
@@ -1439,7 +1439,7 @@ func main() {
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      30,
-			RequiredLevel: 17,
+			RequiredLevel: 1,
 			StarterCode: `package main
 import "fmt"
 func main() {
@@ -1463,7 +1463,7 @@ func main() {
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      25,
-			RequiredLevel: 18,
+			RequiredLevel: 1,
 			StarterCode: `package main
 import "fmt"
 type UserID int

@@ -13,7 +13,7 @@ func GetIntermediateChallenges() []models.Challenge {
 			Difficulty:    models.DifficultyIntermediate,
 			Category:      models.CategoryStructs,
 			XPReward:      50,
-			RequiredLevel: 6,
+			RequiredLevel: 5,
 			Hints: []string{
 				"Define struct: type User struct { Name string; Age int }",
 				"Create instance: user := User{Name: \"Alice\", Age: 25}",
@@ -60,7 +60,7 @@ func main() {
 			Difficulty:    models.DifficultyIntermediate,
 			Category:      models.CategoryStructs,
 			XPReward:      60,
-			RequiredLevel: 7,
+			RequiredLevel: 5,
 			Hints: []string{
 				"Define struct: type Rectangle struct { Width, Height int }",
 				"Add method: func (r Rectangle) Area() int { return r.Width * r.Height }",
@@ -112,7 +112,7 @@ func main() {
 			Difficulty:    models.DifficultyIntermediate,
 			Category:      models.CategoryStructs,
 			XPReward:      70,
-			RequiredLevel: 8,
+			RequiredLevel: 5,
 			Hints: []string{
 				"Function signature: func double(n *int)",
 				"Dereference with *: *n = *n * 2",
@@ -160,7 +160,7 @@ func main() {
 			Difficulty:    models.DifficultyIntermediate,
 			Category:      models.CategoryStructs,
 			XPReward:      80,
-			RequiredLevel: 9,
+			RequiredLevel: 5,
 			Hints: []string{
 				"Define interface: type Shape interface { Area() float64 }",
 				"Implement for Circle with radius",
@@ -222,7 +222,7 @@ func main() {
 			Difficulty:    models.DifficultyIntermediate,
 			Category:      models.CategoryStructs,
 			XPReward:      75,
-			RequiredLevel: 10,
+			RequiredLevel: 5,
 			Hints: []string{
 				"Return (int, error) from function",
 				"Use errors.New() or fmt.Errorf()",
@@ -286,7 +286,7 @@ func main() {
 			Difficulty:    models.DifficultyIntermediate,
 			Category:      models.CategoryStructs,
 			XPReward:      70,
-			RequiredLevel: 8,
+			RequiredLevel: 5,
 			Hints: []string{
 				"Import encoding/json package",
 				"Use json.Marshal() to encode",
@@ -344,7 +344,7 @@ func main() {
 			Difficulty:    models.DifficultyIntermediate,
 			Category:      models.CategoryStructs,
 			XPReward:      60,
-			RequiredLevel: 8,
+			RequiredLevel: 5,
 			Hints: []string{
 				"defer executes after function completes",
 				"Use defer fmt.Println(\"End\")",
@@ -384,7 +384,7 @@ func main() {
 			Difficulty:    models.DifficultyIntermediate,
 			Category:      models.CategoryStructs,
 			XPReward:      75,
-			RequiredLevel: 9,
+			RequiredLevel: 5,
 			Hints: []string{
 				"Return a function from a function",
 				"The inner function can access outer variables",
@@ -438,7 +438,7 @@ func main() {
 			Difficulty:    models.DifficultyIntermediate,
 			Category:      models.CategoryStructs,
 			XPReward:      55,
-			RequiredLevel: 9,
+			RequiredLevel: 5,
 			Hints: []string{
 				"Use slice[start:end] syntax",
 				"End index is exclusive",
@@ -480,7 +480,7 @@ func main() {
 			Difficulty:    models.DifficultyIntermediate,
 			Category:      models.CategoryStructs,
 			XPReward:      60,
-			RequiredLevel: 10,
+			RequiredLevel: 5,
 			Hints: []string{
 				"Use range to iterate over maps",
 				"for key, value := range myMap",
@@ -529,7 +529,7 @@ func main() {
 			Difficulty:    models.DifficultyIntermediate,
 			Category:      models.CategoryStructs,
 			XPReward:      70,
-			RequiredLevel: 11,
+			RequiredLevel: 5,
 			Hints: []string{
 				"var items []interface{}",
 				"Can store int, string, bool, anything",
@@ -572,7 +572,7 @@ func main() {
 			Difficulty:    models.DifficultyIntermediate,
 			Category:      models.CategoryStructs,
 			XPReward:      75,
-			RequiredLevel: 11,
+			RequiredLevel: 5,
 			Hints: []string{
 				"value, ok := i.(string)",
 				"Check ok before using value",
@@ -616,7 +616,7 @@ func main() {
 			Difficulty:    models.DifficultyIntermediate,
 			Category:      models.CategoryStructs,
 			XPReward:      80,
-			RequiredLevel: 12,
+			RequiredLevel: 5,
 			Hints: []string{
 				"switch v := i.(type) { case int: ... case string: ... }",
 				"Handle int and string cases",
@@ -668,7 +668,7 @@ func main() {
 			Difficulty:    models.DifficultyIntermediate,
 			Category:      models.CategoryStructs,
 			XPReward:      85,
-			RequiredLevel: 12,
+			RequiredLevel: 5,
 			Hints: []string{
 				"Create struct with Error() string method",
 				"Implement error interface",
@@ -720,7 +720,7 @@ func main() {
 			Difficulty:    models.DifficultyIntermediate,
 			Category:      models.CategoryStructs,
 			XPReward:      80,
-			RequiredLevel: 13,
+			RequiredLevel: 5,
 			Hints: []string{
 				"Use fmt.Errorf with %w verb",
 				"Wrap original error with context",
@@ -768,7 +768,7 @@ func main() {
 			Difficulty:    models.DifficultyIntermediate,
 			Category:      models.CategoryStructs,
 			XPReward:      90,
-			RequiredLevel: 13,
+			RequiredLevel: 5,
 			Hints: []string{
 				"Use defer with recover()",
 				"Check if recover() != nil",
@@ -815,7 +815,7 @@ func main() {
 			Difficulty:    models.DifficultyIntermediate,
 			Category:      models.CategoryStructs,
 			XPReward:      75,
-			RequiredLevel: 14,
+			RequiredLevel: 5,
 			Hints: []string{
 				"Use os.WriteFile to create test file first",
 				"Use os.ReadFile to read it",
@@ -864,7 +864,7 @@ func main() {
 			Difficulty:    models.DifficultyIntermediate,
 			Category:      models.CategoryStructs,
 			XPReward:      65,
-			RequiredLevel: 14,
+			RequiredLevel: 5,
 			Hints: []string{
 				"Use time.Second constant",
 				"Multiply by 2",
@@ -910,7 +910,7 @@ func main() {
 			Difficulty:    models.DifficultyIntermediate,
 			Category:      models.CategoryStructs,
 			XPReward:      85,
-			RequiredLevel: 15,
+			RequiredLevel: 5,
 			Hints: []string{
 				"Use regexp.MatchString",
 				"Pattern: \\d+ matches digits",
@@ -958,7 +958,7 @@ func main() {
 			Difficulty:    models.DifficultyIntermediate,
 			Category:      models.CategoryStructs,
 			XPReward:      70,
-			RequiredLevel: 15,
+			RequiredLevel: 5,
 			Hints: []string{
 				"Use sort.Ints()",
 				"Sorts in place",
@@ -1006,7 +1006,7 @@ func main() {
 			Difficulty:    models.DifficultyIntermediate,
 			Category:      models.CategoryStructs,
 			XPReward:      90,
-			RequiredLevel: 16,
+			RequiredLevel: 5,
 			StarterCode: `package main
 import "fmt"
 type Reader interface { Read() string }
@@ -1042,7 +1042,7 @@ func main() {
 			Difficulty:    models.DifficultyIntermediate,
 			Category:      models.CategoryStructs,
 			XPReward:      75,
-			RequiredLevel: 16,
+			RequiredLevel: 5,
 			StarterCode: `package main
 import "fmt"
 type Point struct { X, Y int }
@@ -1064,7 +1064,7 @@ func main() { fmt.Println(Point{3, 4}) }`,
 			Difficulty:    models.DifficultyIntermediate,
 			Category:      models.CategoryStructs,
 			XPReward:      80,
-			RequiredLevel: 17,
+			RequiredLevel: 5,
 			StarterCode: `package main
 import ("fmt"; "errors")
 func main() {
@@ -1088,7 +1088,7 @@ func main() {
 			Difficulty:    models.DifficultyIntermediate,
 			Category:      models.CategoryStructs,
 			XPReward:      85,
-			RequiredLevel: 17,
+			RequiredLevel: 5,
 			StarterCode: `package main
 import ("fmt"; "errors")
 var ErrNotFound = errors.New("not found")
@@ -1122,7 +1122,7 @@ func main() {
 			Difficulty:    models.DifficultyIntermediate,
 			Category:      models.CategoryStructs,
 			XPReward:      90,
-			RequiredLevel: 18,
+			RequiredLevel: 5,
 			StarterCode: `package main
 import ("fmt"; "errors")
 var ErrBase = errors.New("base")
@@ -1148,7 +1148,7 @@ func main() {
 			Difficulty:    models.DifficultyIntermediate,
 			Category:      models.CategoryStructs,
 			XPReward:      75,
-			RequiredLevel: 18,
+			RequiredLevel: 5,
 			StarterCode: `package main
 import ("fmt"; "os")
 func main() {
@@ -1174,7 +1174,7 @@ func main() {
 			Difficulty:    models.DifficultyIntermediate,
 			Category:      models.CategoryStructs,
 			XPReward:      85,
-			RequiredLevel: 19,
+			RequiredLevel: 5,
 			StarterCode: `package main
 import ("fmt"; "strings"; "bufio")
 func main() {
@@ -1202,7 +1202,7 @@ func main() {
 			Difficulty:    models.DifficultyIntermediate,
 			Category:      models.CategoryStructs,
 			XPReward:      70,
-			RequiredLevel: 19,
+			RequiredLevel: 5,
 			StarterCode: `package main
 import ("fmt"; "path/filepath")
 func main() {
@@ -1226,7 +1226,7 @@ func main() {
 			Difficulty:    models.DifficultyIntermediate,
 			Category:      models.CategoryStructs,
 			XPReward:      75,
-			RequiredLevel: 20,
+			RequiredLevel: 5,
 			StarterCode: `package main
 import ("fmt"; "time")
 func main() {
@@ -1250,7 +1250,7 @@ func main() {
 			Difficulty:    models.DifficultyIntermediate,
 			Category:      models.CategoryStructs,
 			XPReward:      80,
-			RequiredLevel: 20,
+			RequiredLevel: 5,
 			StarterCode: `package main
 import ("fmt"; "time")
 func main() {
@@ -1276,7 +1276,7 @@ func main() {
 			Difficulty:    models.DifficultyIntermediate,
 			Category:      models.CategoryStructs,
 			XPReward:      85,
-			RequiredLevel: 21,
+			RequiredLevel: 5,
 			StarterCode: `package main
 import ("fmt"; "regexp")
 func main() {
@@ -1300,7 +1300,7 @@ func main() {
 			Difficulty:    models.DifficultyIntermediate,
 			Category:      models.CategoryStructs,
 			XPReward:      75,
-			RequiredLevel: 21,
+			RequiredLevel: 5,
 			StarterCode: `package main
 import ("fmt"; "flag")
 func main() {
@@ -1326,7 +1326,7 @@ func main() {
 			Difficulty:    models.DifficultyIntermediate,
 			Category:      models.CategoryStructs,
 			XPReward:      70,
-			RequiredLevel: 22,
+			RequiredLevel: 5,
 			StarterCode: `package main
 import "fmt"
 func main() {
@@ -1348,7 +1348,7 @@ func main() {
 			Difficulty:    models.DifficultyIntermediate,
 			Category:      models.CategoryStructs,
 			XPReward:      95,
-			RequiredLevel: 22,
+			RequiredLevel: 5,
 			StarterCode: `package main
 import ("fmt"; "sort")
 type ByLen []string
@@ -1382,7 +1382,7 @@ func main() {
 			Difficulty:    models.DifficultyIntermediate,
 			Category:      models.CategoryStructs,
 			XPReward:      85,
-			RequiredLevel: 23,
+			RequiredLevel: 5,
 			StarterCode: `package main
 import ("fmt"; "encoding/json")
 type User struct { Name string; Age int }
