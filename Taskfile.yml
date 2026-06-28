@@ -85,7 +85,7 @@ tasks:
     desc: Clean frontend build artifacts
     dir: "{{.FRONTEND_DIR}}"
     cmds:
-      - rm -rf dist/
+      - find dist/ -type f ! -name 'index.html' -delete 2>/dev/null || true
       - rm -rf node_modules/
 
   # Combined tasks
