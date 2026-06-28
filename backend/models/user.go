@@ -76,28 +76,36 @@ func (u *User) AddXP(xp int) {
 
 // UserResponse is the sanitized user data sent to clients
 type UserResponse struct {
-	ID        string    `json:"id"`
-	Username  string    `json:"username"`
-	Email     string    `json:"email"`
-	Level     int       `json:"level"`
-	XP        int       `json:"xp"`
-	TotalXP   int       `json:"total_xp"`
-	Rank      string    `json:"rank"`
-	CreatedAt time.Time `json:"created_at"`
-	LastLogin time.Time `json:"last_login"`
+	ID            string    `json:"id"`
+	Username      string    `json:"username"`
+	Email         string    `json:"email"`
+	Level         int       `json:"level"`
+	XP            int       `json:"xp"`
+	XPToNextLevel int       `json:"xp_to_next_level"`
+	TotalXP       int       `json:"total_xp"`
+	Rank          string    `json:"rank"`
+	CreatedAt     time.Time `json:"created_at"`
+	LastLogin     time.Time `json:"last_login"`
+}
+
+// GetXPToNextLevel calculates XP needed for next level
+func (u *User) GetXPToNextLevel() int {
+	xpPerLevel := 100
+	return xpPerLevel * (u.Level + 1)
 }
 
 // ToResponse converts User to UserResponse (removes sensitive data)
 func (u *User) ToResponse() UserResponse {
 	return UserResponse{
-		ID:        u.ID,
-		Username:  u.Username,
-		Email:     u.Email,
-		Level:     u.Level,
-		XP:        u.XP,
-		TotalXP:   u.TotalXP,
-		Rank:      u.Rank,
-		CreatedAt: u.CreatedAt,
-		LastLogin: u.LastLogin,
+		ID:            u.ID,
+		Username:      u.Username,
+		Email:         u.Email,
+		Level:         u.Level,
+		XP:            u.XP,
+		XPToNextLevel: u.GetXPToNextLevel(),
+		TotalXP:       u.TotalXP,
+		Rank:          u.Rank,
+		CreatedAt:     u.CreatedAt,
+		LastLogin:     u.LastLogin,
 	}
 }
