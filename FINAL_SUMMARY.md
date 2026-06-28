@@ -1,6 +1,6 @@
 # 🎉 GoHacker - Final Summary
 
-## ✅ Complete ADHD-Friendly Go Learning Platform
+## ✅ Complete Go Learning Platform
 
 A production-ready, gamified platform for learning Go programming with Docker, Kubernetes, and full automation.
 
@@ -170,7 +170,7 @@ task test
 - **Achievements**: 13 badges
 - **Unit Tests**: 15+ (all passing)
 
-## 🎮 ADHD-Friendly Features
+## 🎮 Time-Friendly Features
 
 - ✅ Short, focused challenges
 - ✅ Instant code execution feedback
@@ -223,7 +223,7 @@ curl -k -X POST https://localhost:3000/api/auth/register \
 
 ## 🙏 Acknowledgments
 
-Built with ❤️ for ADHD learners who want to master Go!
+Built with ❤️ for busy developers who want to master Go!
 
 Inspired by Bitburner, powered by:
 - Go 1.26+

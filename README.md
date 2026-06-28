@@ -1,6 +1,6 @@
 # 🎮 GoHacker - Learn Go by Hacking!
 
-An **ADHD-friendly**, gamified platform for learning Go programming through interactive challenges. Built with Go (Gin) backend and Vue.js frontend.
+A gamified platform for learning Go programming through interactive challenges. Built with Go (Gin) backend and modern web frontend.
 
 ![Go Version](https://img.shields.io/badge/Go-1.21+-00ADD8?style=flat&logo=go)
 ![Vue Version](https://img.shields.io/badge/Vue-3.4+-4FC08D?style=flat&logo=vue.js)
@@ -16,7 +16,7 @@ An **ADHD-friendly**, gamified platform for learning Go programming through inte
 - 🏅 **Leaderboard** - Compete with other learners
 - ⚡ **Real-time Code Execution** - Instant feedback on your code
 - 🎨 **Cyberpunk Theme** - Cool hacker aesthetic
-- 🧠 **ADHD-Friendly** - Short challenges, instant feedback, visual progress
+- 🧠 **Time-Friendly** - Short challenges, instant feedback, visual progress
 
 ## 🚀 Quick Start
 
@@ -292,7 +292,7 @@ Have an idea? Open an issue with the `enhancement` label!
 
 ## 📧 Contact
 
-Created with ❤️ for ADHD learners who want to master Go!
+Created with ❤️ for busy developers who want to master Go in bite-sized chunks!
 
 ---
 
