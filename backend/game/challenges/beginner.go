@@ -436,5 +436,238 @@ func main() {
 			},
 			Order: 10,
 		},
+		{
+			ID:            "011-b",
+			Title:         "Range: Iterate Over Slices",
+			Description:   "Use range to iterate over a slice of numbers and print each one",
+			Story:         "🔁 Range makes iteration easy. Master this Go idiom!",
+			Difficulty:    models.DifficultyNewbie,
+			Category:      models.CategoryBasics,
+			XPReward:      25,
+			RequiredLevel: 5,
+			Hints: []string{
+				"Use for i, value := range slice",
+				"Print each value",
+				"Range returns index and value",
+			},
+			StarterCode: `package main
+
+import "fmt"
+
+func main() {
+	numbers := []int{10, 20, 30, 40, 50}
+	// TODO: Use range to iterate and print each number
+	
+}`,
+			Solution: `package main
+
+import "fmt"
+
+func main() {
+	numbers := []int{10, 20, 30, 40, 50}
+	for _, num := range numbers {
+		fmt.Println(num)
+	}
+}`,
+			TestCases: []models.TestCase{
+				{
+					Input:          "",
+					ExpectedOutput: "10\n20\n30\n40\n50\n",
+					Description:    "Should print all numbers",
+					Hidden:         false,
+				},
+			},
+			Order: 11,
+		},
+		{
+			ID:            "012-b",
+			Title:         "Switch Statement",
+			Description:   "Use a switch statement to print the day name for day number 3",
+			Story:         "🎯 Switch statements make multiple conditions cleaner!",
+			Difficulty:    models.DifficultyNewbie,
+			Category:      models.CategoryBasics,
+			XPReward:      30,
+			RequiredLevel: 5,
+			Hints: []string{
+				"Use switch day { case 1: ... case 2: ... }",
+				"Day 3 should print \"Wednesday\"",
+				"Don't forget the default case",
+			},
+			StarterCode: `package main
+
+import "fmt"
+
+func main() {
+	day := 3
+	// TODO: Use switch to print day name
+	
+}`,
+			Solution: `package main
+
+import "fmt"
+
+func main() {
+	day := 3
+	switch day {
+	case 1:
+		fmt.Println("Monday")
+	case 2:
+		fmt.Println("Tuesday")
+	case 3:
+		fmt.Println("Wednesday")
+	case 4:
+		fmt.Println("Thursday")
+	case 5:
+		fmt.Println("Friday")
+	default:
+		fmt.Println("Weekend")
+	}
+}`,
+			TestCases: []models.TestCase{
+				{
+					Input:          "",
+					ExpectedOutput: "Wednesday\n",
+					Description:    "Should print Wednesday",
+					Hidden:         false,
+				},
+			},
+			Order: 12,
+		},
+		{
+			ID:            "013-b",
+			Title:         "Variadic Functions",
+			Description:   "Create a sum function that accepts any number of integers",
+			Story:         "📊 Variadic functions accept variable arguments. Very powerful!",
+			Difficulty:    models.DifficultyNewbie,
+			Category:      models.CategoryBasics,
+			XPReward:      35,
+			RequiredLevel: 6,
+			Hints: []string{
+				"Use ...int for variadic parameter",
+				"func sum(numbers ...int) int",
+				"Loop through numbers to calculate sum",
+			},
+			StarterCode: `package main
+
+import "fmt"
+
+// TODO: Create sum function that accepts variadic int parameters
+
+func main() {
+	result := sum(1, 2, 3, 4, 5)
+	fmt.Println(result)
+}`,
+			Solution: `package main
+
+import "fmt"
+
+func sum(numbers ...int) int {
+	total := 0
+	for _, num := range numbers {
+		total += num
+	}
+	return total
+}
+
+func main() {
+	result := sum(1, 2, 3, 4, 5)
+	fmt.Println(result)
+}`,
+			TestCases: []models.TestCase{
+				{
+					Input:          "",
+					ExpectedOutput: "15\n",
+					Description:    "Should print sum of 1+2+3+4+5",
+					Hidden:         false,
+				},
+			},
+			Order: 13,
+		},
+		{
+			ID:            "014-b",
+			Title:         "String Formatting",
+			Description:   "Use fmt.Sprintf to create a formatted string with name and age",
+			Story:         "✨ String formatting is essential for output. Master it!",
+			Difficulty:    models.DifficultyNewbie,
+			Category:      models.CategoryBasics,
+			XPReward:      25,
+			RequiredLevel: 6,
+			Hints: []string{
+				"Use fmt.Sprintf with %s for strings and %d for integers",
+				"Format: \"Name: %s, Age: %d\"",
+				"Print the formatted string",
+			},
+			StarterCode: `package main
+
+import "fmt"
+
+func main() {
+	name := "Bob"
+	age := 30
+	// TODO: Create formatted string "Name: Bob, Age: 30" and print it
+	
+}`,
+			Solution: `package main
+
+import "fmt"
+
+func main() {
+	name := "Bob"
+	age := 30
+	message := fmt.Sprintf("Name: %s, Age: %d", name, age)
+	fmt.Println(message)
+}`,
+			TestCases: []models.TestCase{
+				{
+					Input:          "",
+					ExpectedOutput: "Name: Bob, Age: 30\n",
+					Description:    "Should print formatted string",
+					Hidden:         false,
+				},
+			},
+			Order: 14,
+		},
+		{
+			ID:            "015-b",
+			Title:         "Type Conversion",
+			Description:   "Convert a float to an int and print the result",
+			Story:         "🔄 Type conversion is crucial. Learn to transform data types!",
+			Difficulty:    models.DifficultyNewbie,
+			Category:      models.CategoryBasics,
+			XPReward:      20,
+			RequiredLevel: 6,
+			Hints: []string{
+				"Use int() to convert float to int",
+				"value := 3.14",
+				"converted := int(value)",
+			},
+			StarterCode: `package main
+
+import "fmt"
+
+func main() {
+	value := 3.14
+	// TODO: Convert to int and print
+	
+}`,
+			Solution: `package main
+
+import "fmt"
+
+func main() {
+	value := 3.14
+	converted := int(value)
+	fmt.Println(converted)
+}`,
+			TestCases: []models.TestCase{
+				{
+					Input:          "",
+					ExpectedOutput: "3\n",
+					Description:    "Should print 3",
+					Hidden:         false,
+				},
+			},
+			Order: 15,
+		},
 	}
 }

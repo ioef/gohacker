@@ -8,7 +8,7 @@ A gamified platform for learning Go programming through interactive challenges. 
 
 ## ✨ Features
 
-- 🎯 **18+ Progressive Challenges** - From basics to concurrency
+- 🎯 **33 Progressive Challenges** - From basics to concurrency
 - 🔐 **JWT Authentication** - Secure user accounts
 - 💾 **In-Memory Database** - Fast with JSON persistence (go-memdb)
 - 🏆 **Achievement System** - Unlock badges and earn XP
