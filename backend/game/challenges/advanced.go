@@ -8,15 +8,15 @@ func GetAdvancedChallenges() []models.Challenge {
 		{
 			ID:            "016",
 			Title:         "Goroutines: Concurrent Execution",
-			Description:   "Create a goroutine that prints \"Hello from goroutine\" and wait for it",
-			Story:         "🚀 Goroutines enable concurrency. Run code in parallel!",
+			Description:   "Start sayHello in a goroutine and keep main alive long enough for it to print \"Hello from goroutine\".",
+			Story:         "🚀 Run sayHello in a goroutine and ensure the mission log appears before main exits.",
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,
 			XPReward:      100,
 			RequiredLevel: 10,
 			Hints: []string{
-				"Use 'go' keyword to start goroutine",
-				"Use time.Sleep to wait for goroutine",
+				"Start the goroutine with go sayHello()",
+				"Use time.Sleep after launching the goroutine",
 				"Import time package",
 			},
 			StarterCode: `package main
@@ -62,7 +62,7 @@ func main() {
 		{
 			ID:            "017",
 			Title:         "Channels: Communication Between Goroutines",
-			Description:   "Create a channel, send a value in a goroutine, and receive it in main",
+			Description:   "Create a channel, send a string from a goroutine, and intercept the message in main.",
 			Story:         "📡 Channels enable goroutines to communicate safely!",
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,
@@ -107,7 +107,7 @@ func main() {
 		{
 			ID:            "018",
 			Title:         "WaitGroups: Synchronization",
-			Description:   "Use sync.WaitGroup to wait for multiple goroutines",
+			Description:   "Use sync.WaitGroup to wait for multiple goroutines to finish.",
 			Story:         "⏳ WaitGroups help coordinate multiple goroutines!",
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,
@@ -169,7 +169,7 @@ func main() {
 		{
 			ID:            "021",
 			Title:         "Buffered Channels",
-			Description:   "Create a buffered channel and send/receive values without blocking",
+			Description:   "Create a buffered channel, send two values, and receive them without blocking.",
 			Story:         "📦 Buffered channels allow asynchronous communication!",
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,
@@ -213,7 +213,7 @@ func main() {
 		{
 			ID:            "022",
 			Title:         "Select Statement",
-			Description:   "Use select to receive from multiple channels",
+			Description:   "Use select to receive from whichever channel is ready first.",
 			Story:         "🎛️ Select lets you handle multiple channel operations!",
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,
@@ -290,7 +290,7 @@ func main() {
 		{
 			ID:            "023",
 			Title:         "Mutex: Safe Concurrent Access",
-			Description:   "Use a mutex to safely increment a counter from multiple goroutines",
+			Description:   "Use a mutex to safely increment a shared counter from multiple goroutines.",
 			Story:         "🔒 Mutexes prevent race conditions in concurrent code!",
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,
@@ -363,7 +363,7 @@ func main() {
 		{
 			ID:            "024",
 			Title:         "Worker Pool Pattern",
-			Description:   "Create a worker pool with 3 workers processing jobs from a channel",
+			Description:   "Create a worker pool with 3 workers processing jobs from a channel.",
 			Story:         "👷 Worker pools efficiently distribute work across goroutines!",
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,
@@ -458,7 +458,7 @@ func main() {
 		{
 			ID:            "025",
 			Title:         "Context: Cancellation",
-			Description:   "Use context to cancel a long-running goroutine",
+			Description:   "Use context cancellation to stop a long-running goroutine.",
 			Story:         "⏱️ Context enables cancellation and timeouts in Go!",
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,
@@ -536,7 +536,7 @@ func main() {
 		{
 			ID:            "026",
 			Title:         "Channel Directions",
-			Description:   "Create functions with send-only and receive-only channel parameters",
+			Description:   "Create functions with send-only and receive-only channel parameters.",
 			Story:         "➡️ Channel directions enforce correct usage patterns!",
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,
@@ -594,7 +594,7 @@ func main() {
 		{
 			ID:            "027",
 			Title:         "Closing Channels",
-			Description:   "Close a channel and detect closure in receiver",
+			Description:   "Close a channel and detect its closure in the receiver.",
 			Story:         "🚪 Closing channels signals completion!",
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,
@@ -646,7 +646,7 @@ func main() {
 		{
 			ID:            "028",
 			Title:         "sync.Once",
-			Description:   "Use sync.Once to ensure initialization happens only once",
+			Description:   "Use sync.Once to run initialization exactly once.",
 			Story:         "1️⃣ sync.Once guarantees single execution!",
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,
@@ -724,7 +724,7 @@ func main() {
 		{
 			ID:            "029",
 			Title:         "RWMutex",
-			Description:   "Use sync.RWMutex for concurrent reads and exclusive writes",
+			Description:   "Use sync.RWMutex for concurrent reads and exclusive writes.",
 			Story:         "📖 RWMutex allows multiple readers or one writer!",
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,
@@ -808,7 +808,7 @@ func main() {
 		{
 			ID:            "030",
 			Title:         "Atomic Operations",
-			Description:   "Use sync/atomic for lock-free counter",
+			Description:   "Use sync/atomic to increment a shared counter without locks.",
 			Story:         "⚛️ Atomic operations are faster than mutexes!",
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,
@@ -878,7 +878,7 @@ func main() {
 		{
 			ID:            "031",
 			Title:         "Fan-Out Pattern",
-			Description:   "Distribute work across multiple workers (fan-out)",
+			Description:   "Distribute work across workers using fan-out goroutines.",
 			Story:         "📤 Fan-out distributes work for parallel processing!",
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,
@@ -980,7 +980,7 @@ func main() {
 		{
 			ID:            "032",
 			Title:         "Pipeline Pattern",
-			Description:   "Create a pipeline with generator, squarer, and printer stages",
+			Description:   "Create a pipeline with generator, squarer, and printer stages.",
 			Story:         "🔗 Pipelines chain operations for data processing!",
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,
@@ -1066,7 +1066,7 @@ func main() {
 		{
 			ID:            "033",
 			Title:         "Rate Limiting",
-			Description:   "Implement rate limiting using time.Ticker",
+			Description:   "Implement rate limiting with time.Ticker to control request flow.",
 			Story:         "⏱️ Rate limiting controls request frequency!",
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,
@@ -1134,7 +1134,7 @@ func main() {
 		{
 			ID:            "034",
 			Title:         "Timeout Pattern",
-			Description:   "Implement timeout using select and time.After",
+			Description:   "Implement timeout using select and time.After.",
 			Story:         "⏰ Timeouts prevent indefinite waiting!",
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,
@@ -1202,7 +1202,7 @@ func main() {
 		{
 			ID:            "035",
 			Title:         "HTTP Server Basics",
-			Description:   "Create a simple HTTP server that responds with \"Hello World\"",
+			Description:   "Stand up a basic HTTP server that responds with \"Hello World\".",
 			Story:         "🌐 HTTP servers are the foundation of web services!",
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,
@@ -1257,7 +1257,7 @@ func main() {
 		{
 			ID:            "036",
 			Title:         "HTTP Client",
-			Description:   "Make HTTP GET request and print response",
+			Description:   "Make an HTTP GET request and print the response body.",
 			Story:         "🌐 HTTP clients consume APIs!",
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,
@@ -1285,7 +1285,7 @@ func main() {
 		{
 			ID:            "037",
 			Title:         "JSON API Response",
-			Description:   "Parse JSON from HTTP response",
+			Description:   "Parse JSON from an HTTP response and print a field.",
 			Story:         "📡 APIs speak JSON!",
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,
@@ -1311,7 +1311,7 @@ func main() {
 		{
 			ID:            "038",
 			Title:         "Middleware Pattern",
-			Description:   "Create HTTP middleware for logging",
+			Description:   "Create HTTP middleware that logs each request.",
 			Story:         "🔗 Middleware chains request processing!",
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,
@@ -1353,7 +1353,7 @@ func main() {
 		{
 			ID:            "039",
 			Title:         "Table-Driven Tests",
-			Description:   "Write table-driven test pattern",
+			Description:   "Write a table-driven test and ensure it passes.",
 			Story:         "✅ Table tests cover multiple cases efficiently!",
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,
@@ -1393,7 +1393,7 @@ func main() {
 		{
 			ID:            "040",
 			Title:         "Benchmarking",
-			Description:   "Understand benchmark pattern",
+			Description:   "Understand benchmark pattern by writing a simple benchmark.",
 			Story:         "⚡ Benchmarks measure performance!",
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,
@@ -1423,7 +1423,7 @@ func main() {
 		{
 			ID:            "041",
 			Title:         "Context with Timeout",
-			Description:   "Use context.WithTimeout for time-limited operations",
+			Description:   "Use context.WithTimeout to limit an operation to a deadline.",
 			Story:         "⏱️ Timeouts prevent hanging operations!",
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,
@@ -1459,7 +1459,7 @@ func main() {
 		{
 			ID:            "042",
 			Title:         "Graceful Shutdown",
-			Description:   "Implement graceful server shutdown",
+			Description:   "Implement graceful server shutdown with context cancellation.",
 			Story:         "🛑 Graceful shutdown ensures clean exit!",
 			Difficulty:    models.DifficultyAdvanced,
 			Category:      models.CategoryConcurrency,

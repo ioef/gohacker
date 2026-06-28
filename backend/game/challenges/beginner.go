@@ -8,8 +8,8 @@ func GetBeginnerChallenges() []models.Challenge {
 		{
 			ID:            "001",
 			Title:         "First Breach: Variable Declaration",
-			Description:   "Declare a variable called 'password' with the value \"admin123\"",
-			Story:         "🎯 Welcome, newbie hacker! Your first mission is simple: inject a password variable into the system. This is your entry point!",
+			Description:   "Hack the entry node by declaring a secret password variable set to \"admin123\".",
+			Story:         "🛡️ Your first quest begins at the login gate. Plant the secret password variable to unlock the system and prove you belong in the crew.",
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      10,
@@ -49,8 +49,8 @@ func main() {
 		{
 			ID:            "002",
 			Title:         "Data Types: Integer Operations",
-			Description:   "Create two variables: 'x' with value 10 and 'y' with value 20, then print their sum",
-			Story:         "💻 The system requires numerical calculations. Show your understanding of integers!",
+			Description:   "Breach the vault by computing the access code from two secret values, x=10 and y=20.",
+			Story:         "🔐 The vault's cipher is simple but lethal. Combine the secret integers to reveal the code and advance deeper.",
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      15,
@@ -90,8 +90,8 @@ func main() {
 		{
 			ID:            "003",
 			Title:         "Control Flow: If Statement",
-			Description:   "Write a program that checks if a number is greater than 10 and prints \"Big\" or \"Small\"",
-			Story:         "🔍 Security systems use conditional logic. Master the if statement!",
+			Description:   "Probe the firewall and print \"Big\" if the signal is above 10, otherwise print \"Small\".",
+			Story:         "🕵️‍♂️ Your code is scanning a security trigger. Use an if-statement to decide whether the signal is strong enough to breach.",
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      20,
@@ -135,8 +135,8 @@ func main() {
 		{
 			ID:            "004",
 			Title:         "If Statements",
-			Description:   "Use an if statement to check if a number is positive",
-			Story:         "🔍 Decision time! Make your code smart with conditionals.",
+			Description:   "Inspect a signal, use an if-statement to mark it positive, then output your verdict.",
+			Story:         "⚡ The system logs a packet. Use logic to judge whether it is a positive trigger and send back the right response.",
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      25,
@@ -176,8 +176,8 @@ func main() {
 		{
 			ID:            "005",
 			Title:         "Functions: Create Your First Function",
-			Description:   "Create a function called 'greet' that takes a name and returns \"Hello, [name]!\"",
-			Story:         "🎭 Functions are reusable code blocks. Master them to become efficient!",
+			Description:   "Forge a greeting function that injects a name into the welcome message: \"Hello, [name]!\".",
+			Story:         "🧩 Build a helper function like a hacker's utility; it should craft the perfect greeting for any alias.",
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      30,
@@ -222,8 +222,8 @@ func main() {
 		{
 			ID:            "006",
 			Title:         "Arrays: Data Storage",
-			Description:   "Create an array of 3 strings and print the second element",
-			Story:         "📦 Arrays store multiple values. Learn to access them!",
+			Description:   "Cache three codewords in an array and exfiltrate the second one.",
+			Story:         "📡 Your loot cache holds three secrets. Pull out the second entry to continue your reconnaissance.",
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      20,
@@ -262,8 +262,8 @@ func main() {
 		{
 			ID:            "007",
 			Title:         "Slices: Dynamic Arrays",
-			Description:   "Create a slice, append values 10, 20, 30 to it, and print the length",
-			Story:         "🔧 Slices are more flexible than arrays. Master dynamic data!",
+			Description:   "Build a packet queue, append 10, 20, 30, then report how many entries are staged.",
+			Story:         "🧠 The network buffer grows as payloads arrive. Append the values and report the queue size.",
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      25,
@@ -305,8 +305,8 @@ func main() {
 		{
 			ID:            "008",
 			Title:         "Maps: Key-Value Storage",
-			Description:   "Create a map with string keys and int values, add \"score\": 100, and print it",
-			Story:         "🗺️ Maps are like dictionaries. Perfect for storing related data!",
+			Description:   "Craft a key-value exploit map, stash \"score\" at 100, and retrieve it.",
+			Story:         "🗝️ In the hacker vault, keys open hidden values. Store the score and fetch it like a pro.",
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      30,
@@ -346,8 +346,8 @@ func main() {
 		{
 			ID:            "009",
 			Title:         "String Manipulation",
-			Description:   "Take a string \"golang\" and print it in uppercase",
-			Story:         "✨ Text processing is essential. Learn string operations!",
+			Description:   "Elevate the secret codeword \"golang\" to uppercase and unlock the next stage.",
+			Story:         "🧪 Decode the signature by transforming the codeword into uppercase — the signal must be loud and clear.",
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      20,
@@ -393,8 +393,8 @@ func main() {
 		{
 			ID:            "010",
 			Title:         "Multiple Return Values",
-			Description:   "Create a function that returns both quotient and remainder of division",
-			Story:         "🎯 Go functions can return multiple values. Use this power!",
+			Description:   "Send a division function that returns quotient and remainder for the extraction.",
+			Story:         "🔧 Craft a utility that splits a value cleanly and returns both parts, just like a hacker dividing loot.",
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      35,
@@ -439,8 +439,8 @@ func main() {
 		{
 			ID:            "011-b",
 			Title:         "Range: Iterate Over Slices",
-			Description:   "Use range to iterate over a slice of numbers and print each one",
-			Story:         "🔁 Range makes iteration easy. Master this Go idiom!",
+			Description:   "Sweep through the numeric slice with range and log every value.",
+			Story:         "🧭 Launch a range scan over the data stream. Each number is a signal to capture.",
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      25,
@@ -482,8 +482,8 @@ func main() {
 		{
 			ID:            "012-b",
 			Title:         "Switch Statement",
-			Description:   "Use a switch statement to print the day name for day number 3",
-			Story:         "🎯 Switch statements make multiple conditions cleaner!",
+			Description:   "Decrypt day code 3 with a switch statement and print its name.",
+			Story:         "🧠 The scheduler uses code numbers for days. Branch your logic and decode day 3.",
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      30,
@@ -536,8 +536,8 @@ func main() {
 		{
 			ID:            "013-b",
 			Title:         "Variadic Functions",
-			Description:   "Create a sum function that accepts any number of integers",
-			Story:         "📊 Variadic functions accept variable arguments. Very powerful!",
+			Description:   "Write a sum function that ingests any number of values and returns the total.",
+			Story:         "⚡ Build a flexible summoner function that can absorb any number of integers and return the total payload.",
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
 			XPReward:      35,
@@ -586,7 +586,7 @@ func main() {
 		{
 			ID:            "014-b",
 			Title:         "String Formatting",
-			Description:   "Use fmt.Sprintf to create a formatted string with name and age",
+			Description:   "Use fmt.Sprintf to forge a formatted string containing name and age.",
 			Story:         "✨ String formatting is essential for output. Master it!",
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
@@ -630,7 +630,7 @@ func main() {
 		{
 			ID:            "015-b",
 			Title:         "Type Conversion",
-			Description:   "Convert a float to an int and print the result",
+			Description:   "Convert the intercepted float 3.14 into an integer and print the result.",
 			Story:         "🔄 Type conversion is crucial. Learn to transform data types!",
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
@@ -672,7 +672,7 @@ func main() {
 		{
 			ID:            "016-b",
 			Title:         "Constants Declaration",
-			Description:   "Declare a constant PI with value 3.14159 and print it",
+			Description:   "Declare a constant PI = 3.14159 and print its value to lock in the numeric key.",
 			Story:         "🔒 Constants are immutable values. Perfect for fixed data!",
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
@@ -712,7 +712,7 @@ func main() {
 		{
 			ID:            "017-b",
 			Title:         "Iota Enumerator",
-			Description:   "Use iota to create constants for days of week (Sunday=0, Monday=1, Tuesday=2)",
+			Description:   "Use iota to define weekday constants and print the Tuesday code.",
 			Story:         "🔢 Iota creates sequential constants automatically!",
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
@@ -757,7 +757,7 @@ func main() {
 		{
 			ID:            "018-b",
 			Title:         "Boolean Logic",
-			Description:   "Check if a number is between 10 and 20 (inclusive) using boolean operators",
+			Description:   "Check whether a signal is between 10 and 20 inclusive and print true or false.",
 			Story:         "✅ Boolean logic is fundamental to programming!",
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
@@ -799,7 +799,7 @@ func main() {
 		{
 			ID:            "019-b",
 			Title:         "Break Statement",
-			Description:   "Loop from 1 to 10 but break when you reach 5",
+			Description:   "Loop from 1 to 10 and cut the scan short when you hit 5.",
 			Story:         "🛑 Break lets you exit loops early!",
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
@@ -843,7 +843,7 @@ func main() {
 		{
 			ID:            "020-b",
 			Title:         "Continue Statement",
-			Description:   "Print numbers 1-5 but skip 3 using continue",
+			Description:   "Print 1 through 5 but bypass signal 3 with continue.",
 			Story:         "⏭️ Continue skips to next iteration!",
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
@@ -887,7 +887,7 @@ func main() {
 		{
 			ID:            "021-b",
 			Title:         "Named Return Values",
-			Description:   "Create a function with named return values that calculates area and perimeter of rectangle",
+			Description:   "Build a function with named return values that computes rectangle area and perimeter.",
 			Story:         "📛 Named returns make code more readable!",
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
@@ -935,7 +935,7 @@ func main() {
 		{
 			ID:            "022-b",
 			Title:         "Anonymous Function",
-			Description:   "Create and immediately call an anonymous function that prints a message",
+			Description:   "Define and immediately invoke an anonymous function to print a mission message.",
 			Story:         "🎭 Anonymous functions are functions without names!",
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
@@ -976,7 +976,7 @@ func main() {
 		{
 			ID:            "023-b",
 			Title:         "Recursive Factorial",
-			Description:   "Write a recursive function to calculate factorial of 5",
+			Description:   "Implement a recursive factorial function and compute 5!.",
 			Story:         "🔄 Recursion: a function calling itself!",
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
@@ -1025,7 +1025,7 @@ func main() {
 		{
 			ID:            "024-b",
 			Title:         "Slice Capacity",
-			Description:   "Create a slice with length 3 and capacity 5, print both",
+			Description:   "Create a slice with length 3 and capacity 5, then print both len and cap.",
 			Story:         "📏 Understanding capacity is key to slice performance!",
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
@@ -1065,7 +1065,7 @@ func main() {
 		{
 			ID:            "025-b",
 			Title:         "Copy Slices",
-			Description:   "Create a slice, copy it to another slice, and print the copy",
+			Description:   "Copy one slice into another and print the copied slice.",
 			Story:         "📋 Copying slices prevents unwanted modifications!",
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
@@ -1108,7 +1108,7 @@ func main() {
 		{
 			ID:            "026-b",
 			Title:         "Multi-dimensional Arrays",
-			Description:   "Create a 2x3 array and print element at [1][2]",
+			Description:   "Create a 2x3 array and print the element at row 1, column 2.",
 			Story:         "🎯 Multi-dimensional arrays store matrix data!",
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
@@ -1131,7 +1131,7 @@ func main() {
 		{
 			ID:            "027-b",
 			Title:         "Nested Maps",
-			Description:   "Create a map of maps to store user scores",
+			Description:   "Construct a nested map for user scores and print Alice's math score.",
 			Story:         "🗺️ Nested maps handle complex data!",
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
@@ -1155,7 +1155,7 @@ func main() {
 		{
 			ID:            "028-b",
 			Title:         "Struct Embedding",
-			Description:   "Embed one struct in another",
+			Description:   "Embed one struct inside another and print the embedded field.",
 			Story:         "🎁 Embedding promotes composition over inheritance!",
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
@@ -1183,7 +1183,7 @@ func main() {
 		{
 			ID:            "029-b",
 			Title:         "String Concatenation",
-			Description:   "Concatenate strings efficiently",
+			Description:   "Concatenate two strings and print the joined result.",
 			Story:         "➕ String concatenation builds text!",
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
@@ -1207,7 +1207,7 @@ func main() {
 		{
 			ID:            "030-b",
 			Title:         "String Contains",
-			Description:   "Check if string contains substring",
+			Description:   "Check whether a string contains the substring \"World\" and print the boolean.",
 			Story:         "🔍 String searching is essential!",
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
@@ -1231,7 +1231,7 @@ func main() {
 		{
 			ID:            "031-b",
 			Title:         "String Builder",
-			Description:   "Use strings.Builder for efficient concatenation",
+			Description:   "Use strings.Builder to efficiently assemble and print a combined string.",
 			Story:         "🏗️ Builder is faster for multiple concatenations!",
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
@@ -1257,7 +1257,7 @@ func main() {
 		{
 			ID:            "032-b",
 			Title:         "Zero Values",
-			Description:   "Print zero values of different types",
+			Description:   "Print the zero values for int, string, and bool.",
 			Story:         "0️⃣ Understanding zero values prevents bugs!",
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
@@ -1281,7 +1281,7 @@ func main() {
 		{
 			ID:            "033-b",
 			Title:         "Variable Scope",
-			Description:   "Understand block scope",
+			Description:   "Show how block scope decides which variable is printed.",
 			Story:         "📦 Scope determines variable visibility!",
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
@@ -1307,7 +1307,7 @@ func main() {
 		{
 			ID:            "034-b",
 			Title:         "Nested Loops",
-			Description:   "Print multiplication table using nested loops",
+			Description:   "Print a 2x2 multiplication table using nested loops.",
 			Story:         "🔄 Nested loops handle 2D iteration!",
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
@@ -1334,7 +1334,7 @@ func main() {
 		{
 			ID:            "035-b",
 			Title:         "Loop Patterns",
-			Description:   "Use different loop patterns",
+			Description:   "Demonstrate a while-style for loop by printing 0, 1, 2.",
 			Story:         "🔁 Go has flexible loop syntax!",
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
@@ -1358,7 +1358,7 @@ func main() {
 		{
 			ID:            "036-b",
 			Title:         "Early Returns",
-			Description:   "Use early returns for cleaner code",
+			Description:   "Use an early return in a function so it yields \"negative\" or \"positive\" cleanly.",
 			Story:         "↩️ Early returns improve readability!",
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
@@ -1384,7 +1384,7 @@ func main() { fmt.Println(check(5)) }`,
 		{
 			ID:            "037-b",
 			Title:         "Function as Value",
-			Description:   "Assign function to variable",
+			Description:   "Assign a function to a variable and invoke it to print the result.",
 			Story:         "🎯 Functions are first-class values!",
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
@@ -1408,7 +1408,7 @@ func main() {
 		{
 			ID:            "038-b",
 			Title:         "Higher-Order Functions",
-			Description:   "Pass function as parameter",
+			Description:   "Pass a function as a parameter and use it to transform a value.",
 			Story:         "🎓 Higher-order functions enable powerful patterns!",
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
@@ -1434,7 +1434,7 @@ func main() {
 		{
 			ID:            "039-b",
 			Title:         "Bitwise Operators",
-			Description:   "Use bitwise AND operation",
+			Description:   "Compute the bitwise AND of 12 and 10 and print the result.",
 			Story:         "⚡ Bitwise ops are fast and powerful!",
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
@@ -1458,7 +1458,7 @@ func main() {
 		{
 			ID:            "040-b",
 			Title:         "Type Aliases",
-			Description:   "Create type alias for clarity",
+			Description:   "Create a type alias and use it to declare a UserID value.",
 			Story:         "📛 Type aliases improve code readability!",
 			Difficulty:    models.DifficultyNewbie,
 			Category:      models.CategoryBasics,
