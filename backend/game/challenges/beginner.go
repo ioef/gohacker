@@ -669,5 +669,441 @@ func main() {
 			},
 			Order: 15,
 		},
+		{
+			ID:            "016-b",
+			Title:         "Constants Declaration",
+			Description:   "Declare a constant PI with value 3.14159 and print it",
+			Story:         "🔒 Constants are immutable values. Perfect for fixed data!",
+			Difficulty:    models.DifficultyNewbie,
+			Category:      models.CategoryBasics,
+			XPReward:      15,
+			RequiredLevel: 7,
+			Hints: []string{
+				"Use const keyword",
+				"const PI = 3.14159",
+				"Constants cannot be changed",
+			},
+			StarterCode: `package main
+
+import "fmt"
+
+func main() {
+	// TODO: Declare constant PI = 3.14159 and print it
+	
+}`,
+			Solution: `package main
+
+import "fmt"
+
+func main() {
+	const PI = 3.14159
+	fmt.Println(PI)
+}`,
+			TestCases: []models.TestCase{
+				{
+					Input:          "",
+					ExpectedOutput: "3.14159\n",
+					Description:    "Should print PI",
+					Hidden:         false,
+				},
+			},
+			Order: 16,
+		},
+		{
+			ID:            "017-b",
+			Title:         "Iota Enumerator",
+			Description:   "Use iota to create constants for days of week (Sunday=0, Monday=1, Tuesday=2)",
+			Story:         "🔢 Iota creates sequential constants automatically!",
+			Difficulty:    models.DifficultyNewbie,
+			Category:      models.CategoryBasics,
+			XPReward:      30,
+			RequiredLevel: 7,
+			Hints: []string{
+				"const ( Sunday = iota; Monday; Tuesday )",
+				"iota starts at 0 and increments",
+				"Print Tuesday to verify",
+			},
+			StarterCode: `package main
+
+import "fmt"
+
+func main() {
+	// TODO: Create constants using iota and print Tuesday
+	
+}`,
+			Solution: `package main
+
+import "fmt"
+
+const (
+	Sunday = iota
+	Monday
+	Tuesday
+)
+
+func main() {
+	fmt.Println(Tuesday)
+}`,
+			TestCases: []models.TestCase{
+				{
+					Input:          "",
+					ExpectedOutput: "2\n",
+					Description:    "Tuesday should be 2",
+					Hidden:         false,
+				},
+			},
+			Order: 17,
+		},
+		{
+			ID:            "018-b",
+			Title:         "Boolean Logic",
+			Description:   "Check if a number is between 10 and 20 (inclusive) using boolean operators",
+			Story:         "✅ Boolean logic is fundamental to programming!",
+			Difficulty:    models.DifficultyNewbie,
+			Category:      models.CategoryBasics,
+			XPReward:      20,
+			RequiredLevel: 7,
+			Hints: []string{
+				"Use && for AND operation",
+				"Check num >= 10 && num <= 20",
+				"Print true or false",
+			},
+			StarterCode: `package main
+
+import "fmt"
+
+func main() {
+	num := 15
+	// TODO: Check if num is between 10 and 20, print result
+	
+}`,
+			Solution: `package main
+
+import "fmt"
+
+func main() {
+	num := 15
+	result := num >= 10 && num <= 20
+	fmt.Println(result)
+}`,
+			TestCases: []models.TestCase{
+				{
+					Input:          "",
+					ExpectedOutput: "true\n",
+					Description:    "15 is between 10 and 20",
+					Hidden:         false,
+				},
+			},
+			Order: 18,
+		},
+		{
+			ID:            "019-b",
+			Title:         "Break Statement",
+			Description:   "Loop from 1 to 10 but break when you reach 5",
+			Story:         "🛑 Break lets you exit loops early!",
+			Difficulty:    models.DifficultyNewbie,
+			Category:      models.CategoryBasics,
+			XPReward:      25,
+			RequiredLevel: 8,
+			Hints: []string{
+				"Use for loop from 1 to 10",
+				"if i == 5 { break }",
+				"Print numbers before breaking",
+			},
+			StarterCode: `package main
+
+import "fmt"
+
+func main() {
+	// TODO: Loop 1-10, print each, break at 5
+	
+}`,
+			Solution: `package main
+
+import "fmt"
+
+func main() {
+	for i := 1; i <= 10; i++ {
+		if i == 5 {
+			break
+		}
+		fmt.Println(i)
+	}
+}`,
+			TestCases: []models.TestCase{
+				{
+					Input:          "",
+					ExpectedOutput: "1\n2\n3\n4\n",
+					Description:    "Should print 1-4 then break",
+					Hidden:         false,
+				},
+			},
+			Order: 19,
+		},
+		{
+			ID:            "020-b",
+			Title:         "Continue Statement",
+			Description:   "Print numbers 1-5 but skip 3 using continue",
+			Story:         "⏭️ Continue skips to next iteration!",
+			Difficulty:    models.DifficultyNewbie,
+			Category:      models.CategoryBasics,
+			XPReward:      25,
+			RequiredLevel: 8,
+			Hints: []string{
+				"Use for loop 1 to 5",
+				"if i == 3 { continue }",
+				"Print after the continue check",
+			},
+			StarterCode: `package main
+
+import "fmt"
+
+func main() {
+	// TODO: Loop 1-5, skip 3, print others
+	
+}`,
+			Solution: `package main
+
+import "fmt"
+
+func main() {
+	for i := 1; i <= 5; i++ {
+		if i == 3 {
+			continue
+		}
+		fmt.Println(i)
+	}
+}`,
+			TestCases: []models.TestCase{
+				{
+					Input:          "",
+					ExpectedOutput: "1\n2\n4\n5\n",
+					Description:    "Should skip 3",
+					Hidden:         false,
+				},
+			},
+			Order: 20,
+		},
+		{
+			ID:            "021-b",
+			Title:         "Named Return Values",
+			Description:   "Create a function with named return values that calculates area and perimeter of rectangle",
+			Story:         "📛 Named returns make code more readable!",
+			Difficulty:    models.DifficultyNewbie,
+			Category:      models.CategoryBasics,
+			XPReward:      35,
+			RequiredLevel: 8,
+			Hints: []string{
+				"func calc(w, h int) (area, perimeter int)",
+				"Assign to area and perimeter directly",
+				"Use naked return",
+			},
+			StarterCode: `package main
+
+import "fmt"
+
+// TODO: Create function with named returns
+
+func main() {
+	a, p := calculate(5, 10)
+	fmt.Println(a, p)
+}`,
+			Solution: `package main
+
+import "fmt"
+
+func calculate(width, height int) (area, perimeter int) {
+	area = width * height
+	perimeter = 2 * (width + height)
+	return
+}
+
+func main() {
+	a, p := calculate(5, 10)
+	fmt.Println(a, p)
+}`,
+			TestCases: []models.TestCase{
+				{
+					Input:          "",
+					ExpectedOutput: "50 30\n",
+					Description:    "Area=50, Perimeter=30",
+					Hidden:         false,
+				},
+			},
+			Order: 21,
+		},
+		{
+			ID:            "022-b",
+			Title:         "Anonymous Function",
+			Description:   "Create and immediately call an anonymous function that prints a message",
+			Story:         "🎭 Anonymous functions are functions without names!",
+			Difficulty:    models.DifficultyNewbie,
+			Category:      models.CategoryBasics,
+			XPReward:      30,
+			RequiredLevel: 9,
+			Hints: []string{
+				"func() { ... }()",
+				"Define and call in one expression",
+				"Use () at the end to call it",
+			},
+			StarterCode: `package main
+
+import "fmt"
+
+func main() {
+	// TODO: Create and call anonymous function that prints "Hello Anonymous"
+	
+}`,
+			Solution: `package main
+
+import "fmt"
+
+func main() {
+	func() {
+		fmt.Println("Hello Anonymous")
+	}()
+}`,
+			TestCases: []models.TestCase{
+				{
+					Input:          "",
+					ExpectedOutput: "Hello Anonymous\n",
+					Description:    "Should print message",
+					Hidden:         false,
+				},
+			},
+			Order: 22,
+		},
+		{
+			ID:            "023-b",
+			Title:         "Recursive Factorial",
+			Description:   "Write a recursive function to calculate factorial of 5",
+			Story:         "🔄 Recursion: a function calling itself!",
+			Difficulty:    models.DifficultyNewbie,
+			Category:      models.CategoryBasics,
+			XPReward:      40,
+			RequiredLevel: 9,
+			Hints: []string{
+				"Base case: if n == 0 return 1",
+				"Recursive case: return n * factorial(n-1)",
+				"factorial(5) = 120",
+			},
+			StarterCode: `package main
+
+import "fmt"
+
+// TODO: Create recursive factorial function
+
+func main() {
+	result := factorial(5)
+	fmt.Println(result)
+}`,
+			Solution: `package main
+
+import "fmt"
+
+func factorial(n int) int {
+	if n == 0 {
+		return 1
+	}
+	return n * factorial(n-1)
+}
+
+func main() {
+	result := factorial(5)
+	fmt.Println(result)
+}`,
+			TestCases: []models.TestCase{
+				{
+					Input:          "",
+					ExpectedOutput: "120\n",
+					Description:    "5! = 120",
+					Hidden:         false,
+				},
+			},
+			Order: 23,
+		},
+		{
+			ID:            "024-b",
+			Title:         "Slice Capacity",
+			Description:   "Create a slice with length 3 and capacity 5, print both",
+			Story:         "📏 Understanding capacity is key to slice performance!",
+			Difficulty:    models.DifficultyNewbie,
+			Category:      models.CategoryBasics,
+			XPReward:      30,
+			RequiredLevel: 10,
+			Hints: []string{
+				"Use make([]int, length, capacity)",
+				"len() returns length",
+				"cap() returns capacity",
+			},
+			StarterCode: `package main
+
+import "fmt"
+
+func main() {
+	// TODO: Create slice with len=3, cap=5, print both
+	
+}`,
+			Solution: `package main
+
+import "fmt"
+
+func main() {
+	s := make([]int, 3, 5)
+	fmt.Println(len(s), cap(s))
+}`,
+			TestCases: []models.TestCase{
+				{
+					Input:          "",
+					ExpectedOutput: "3 5\n",
+					Description:    "Length 3, capacity 5",
+					Hidden:         false,
+				},
+			},
+			Order: 24,
+		},
+		{
+			ID:            "025-b",
+			Title:         "Copy Slices",
+			Description:   "Create a slice, copy it to another slice, and print the copy",
+			Story:         "📋 Copying slices prevents unwanted modifications!",
+			Difficulty:    models.DifficultyNewbie,
+			Category:      models.CategoryBasics,
+			XPReward:      30,
+			RequiredLevel: 10,
+			Hints: []string{
+				"Use copy(dst, src)",
+				"Create destination slice with make",
+				"copy returns number of elements copied",
+			},
+			StarterCode: `package main
+
+import "fmt"
+
+func main() {
+	original := []int{1, 2, 3}
+	// TODO: Copy to new slice and print it
+	
+}`,
+			Solution: `package main
+
+import "fmt"
+
+func main() {
+	original := []int{1, 2, 3}
+	copied := make([]int, len(original))
+	copy(copied, original)
+	fmt.Println(copied)
+}`,
+			TestCases: []models.TestCase{
+				{
+					Input:          "",
+					ExpectedOutput: "[1 2 3]\n",
+					Description:    "Should print copied slice",
+					Hidden:         false,
+				},
+			},
+			Order: 25,
+		},
 	}
 }

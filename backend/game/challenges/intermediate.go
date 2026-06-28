@@ -521,5 +521,482 @@ func main() {
 			},
 			Order: 20,
 		},
+		{
+			ID:            "021",
+			Title:         "Empty Interface",
+			Description:   "Use interface{} to store different types in a slice",
+			Story:         "🎭 Empty interface can hold any type!",
+			Difficulty:    models.DifficultyIntermediate,
+			Category:      models.CategoryStructs,
+			XPReward:      70,
+			RequiredLevel: 11,
+			Hints: []string{
+				"var items []interface{}",
+				"Can store int, string, bool, anything",
+				"Print the slice",
+			},
+			StarterCode: `package main
+
+import "fmt"
+
+func main() {
+	// TODO: Create slice of interface{}, add 42, "hello", true, print it
+	
+}`,
+			Solution: `package main
+
+import "fmt"
+
+func main() {
+	var items []interface{}
+	items = append(items, 42)
+	items = append(items, "hello")
+	items = append(items, true)
+	fmt.Println(items)
+}`,
+			TestCases: []models.TestCase{
+				{
+					Input:          "",
+					ExpectedOutput: "[42 hello true]\n",
+					Description:    "Should print mixed types",
+					Hidden:         false,
+				},
+			},
+			Order: 21,
+		},
+		{
+			ID:            "022",
+			Title:         "Type Assertion",
+			Description:   "Use type assertion to extract a string from interface{}",
+			Story:         "🔍 Type assertions let you access underlying values!",
+			Difficulty:    models.DifficultyIntermediate,
+			Category:      models.CategoryStructs,
+			XPReward:      75,
+			RequiredLevel: 11,
+			Hints: []string{
+				"value, ok := i.(string)",
+				"Check ok before using value",
+				"Print the extracted string",
+			},
+			StarterCode: `package main
+
+import "fmt"
+
+func main() {
+	var i interface{} = "hello"
+	// TODO: Extract string using type assertion and print
+	
+}`,
+			Solution: `package main
+
+import "fmt"
+
+func main() {
+	var i interface{} = "hello"
+	str, ok := i.(string)
+	if ok {
+		fmt.Println(str)
+	}
+}`,
+			TestCases: []models.TestCase{
+				{
+					Input:          "",
+					ExpectedOutput: "hello\n",
+					Description:    "Should extract and print string",
+					Hidden:         false,
+				},
+			},
+			Order: 22,
+		},
+		{
+			ID:            "023",
+			Title:         "Type Switch",
+			Description:   "Use type switch to handle different types",
+			Story:         "🔀 Type switches make type handling elegant!",
+			Difficulty:    models.DifficultyIntermediate,
+			Category:      models.CategoryStructs,
+			XPReward:      80,
+			RequiredLevel: 12,
+			Hints: []string{
+				"switch v := i.(type) { case int: ... case string: ... }",
+				"Handle int and string cases",
+				"Print type-specific message",
+			},
+			StarterCode: `package main
+
+import "fmt"
+
+func printType(i interface{}) {
+	// TODO: Use type switch to print "int: X" or "string: X"
+	
+}
+
+func main() {
+	printType(42)
+}`,
+			Solution: `package main
+
+import "fmt"
+
+func printType(i interface{}) {
+	switch v := i.(type) {
+	case int:
+		fmt.Printf("int: %d\n", v)
+	case string:
+		fmt.Printf("string: %s\n", v)
+	}
+}
+
+func main() {
+	printType(42)
+}`,
+			TestCases: []models.TestCase{
+				{
+					Input:          "",
+					ExpectedOutput: "int: 42\n",
+					Description:    "Should identify int type",
+					Hidden:         false,
+				},
+			},
+			Order: 23,
+		},
+		{
+			ID:            "024",
+			Title:         "Custom Error Type",
+			Description:   "Create a custom error type with additional context",
+			Story:         "⚠️ Custom errors provide better debugging info!",
+			Difficulty:    models.DifficultyIntermediate,
+			Category:      models.CategoryStructs,
+			XPReward:      85,
+			RequiredLevel: 12,
+			Hints: []string{
+				"Create struct with Error() string method",
+				"Implement error interface",
+				"Return your custom error",
+			},
+			StarterCode: `package main
+
+import "fmt"
+
+// TODO: Create MyError struct with Code int and Message string
+// TODO: Implement Error() string method
+
+func main() {
+	err := &MyError{Code: 404, Message: "Not Found"}
+	fmt.Println(err.Error())
+}`,
+			Solution: `package main
+
+import "fmt"
+
+type MyError struct {
+	Code    int
+	Message string
+}
+
+func (e *MyError) Error() string {
+	return fmt.Sprintf("Error %d: %s", e.Code, e.Message)
+}
+
+func main() {
+	err := &MyError{Code: 404, Message: "Not Found"}
+	fmt.Println(err.Error())
+}`,
+			TestCases: []models.TestCase{
+				{
+					Input:          "",
+					ExpectedOutput: "Error 404: Not Found\n",
+					Description:    "Should format custom error",
+					Hidden:         false,
+				},
+			},
+			Order: 24,
+		},
+		{
+			ID:            "025",
+			Title:         "Error Wrapping",
+			Description:   "Wrap an error with additional context using fmt.Errorf",
+			Story:         "📦 Error wrapping preserves error chain!",
+			Difficulty:    models.DifficultyIntermediate,
+			Category:      models.CategoryStructs,
+			XPReward:      80,
+			RequiredLevel: 13,
+			Hints: []string{
+				"Use fmt.Errorf with %w verb",
+				"Wrap original error with context",
+				"Print wrapped error",
+			},
+			StarterCode: `package main
+
+import (
+	"errors"
+	"fmt"
+)
+
+func main() {
+	original := errors.New("database error")
+	// TODO: Wrap with "failed to connect: %w" and print
+	
+}`,
+			Solution: `package main
+
+import (
+	"errors"
+	"fmt"
+)
+
+func main() {
+	original := errors.New("database error")
+	wrapped := fmt.Errorf("failed to connect: %w", original)
+	fmt.Println(wrapped)
+}`,
+			TestCases: []models.TestCase{
+				{
+					Input:          "",
+					ExpectedOutput: "failed to connect: database error\n",
+					Description:    "Should wrap error",
+					Hidden:         false,
+				},
+			},
+			Order: 25,
+		},
+		{
+			ID:            "026",
+			Title:         "Panic and Recover",
+			Description:   "Use recover to catch a panic and print recovery message",
+			Story:         "🚨 Recover prevents panics from crashing your program!",
+			Difficulty:    models.DifficultyIntermediate,
+			Category:      models.CategoryStructs,
+			XPReward:      90,
+			RequiredLevel: 13,
+			Hints: []string{
+				"Use defer with recover()",
+				"Check if recover() != nil",
+				"Print \"recovered\" if panic caught",
+			},
+			StarterCode: `package main
+
+import "fmt"
+
+func main() {
+	defer func() {
+		// TODO: Recover from panic and print "recovered"
+		
+	}()
+	panic("oops")
+}`,
+			Solution: `package main
+
+import "fmt"
+
+func main() {
+	defer func() {
+		if r := recover(); r != nil {
+			fmt.Println("recovered")
+		}
+	}()
+	panic("oops")
+}`,
+			TestCases: []models.TestCase{
+				{
+					Input:          "",
+					ExpectedOutput: "recovered\n",
+					Description:    "Should recover from panic",
+					Hidden:         false,
+				},
+			},
+			Order: 26,
+		},
+		{
+			ID:            "027",
+			Title:         "Read File",
+			Description:   "Read a file using os.ReadFile and print its content",
+			Story:         "📖 File I/O is essential for real applications!",
+			Difficulty:    models.DifficultyIntermediate,
+			Category:      models.CategoryStructs,
+			XPReward:      75,
+			RequiredLevel: 14,
+			Hints: []string{
+				"Use os.WriteFile to create test file first",
+				"Use os.ReadFile to read it",
+				"Print the content as string",
+			},
+			StarterCode: `package main
+
+import (
+	"fmt"
+	"os"
+)
+
+func main() {
+	// Create test file
+	os.WriteFile("/tmp/test.txt", []byte("Hello File"), 0644)
+	// TODO: Read and print the file content
+	
+}`,
+			Solution: `package main
+
+import (
+	"fmt"
+	"os"
+)
+
+func main() {
+	os.WriteFile("/tmp/test.txt", []byte("Hello File"), 0644)
+	data, _ := os.ReadFile("/tmp/test.txt")
+	fmt.Println(string(data))
+}`,
+			TestCases: []models.TestCase{
+				{
+					Input:          "",
+					ExpectedOutput: "Hello File\n",
+					Description:    "Should read file content",
+					Hidden:         false,
+				},
+			},
+			Order: 27,
+		},
+		{
+			ID:            "028",
+			Title:         "Time Duration",
+			Description:   "Create a duration of 2 seconds and print it",
+			Story:         "⏱️ Time package is crucial for delays and timeouts!",
+			Difficulty:    models.DifficultyIntermediate,
+			Category:      models.CategoryStructs,
+			XPReward:      65,
+			RequiredLevel: 14,
+			Hints: []string{
+				"Use time.Second constant",
+				"Multiply by 2",
+				"Print the duration",
+			},
+			StarterCode: `package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+	// TODO: Create 2 second duration and print
+	
+}`,
+			Solution: `package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+	d := 2 * time.Second
+	fmt.Println(d)
+}`,
+			TestCases: []models.TestCase{
+				{
+					Input:          "",
+					ExpectedOutput: "2s\n",
+					Description:    "Should print 2s",
+					Hidden:         false,
+				},
+			},
+			Order: 28,
+		},
+		{
+			ID:            "029",
+			Title:         "Regular Expression Match",
+			Description:   "Use regexp to check if a string contains digits",
+			Story:         "🔍 Regex is powerful for pattern matching!",
+			Difficulty:    models.DifficultyIntermediate,
+			Category:      models.CategoryStructs,
+			XPReward:      85,
+			RequiredLevel: 15,
+			Hints: []string{
+				"Use regexp.MatchString",
+				"Pattern: \\d+ matches digits",
+				"Print true or false",
+			},
+			StarterCode: `package main
+
+import (
+	"fmt"
+	"regexp"
+)
+
+func main() {
+	text := "hello123"
+	// TODO: Check if text contains digits, print result
+	
+}`,
+			Solution: `package main
+
+import (
+	"fmt"
+	"regexp"
+)
+
+func main() {
+	text := "hello123"
+	matched, _ := regexp.MatchString("\\d+", text)
+	fmt.Println(matched)
+}`,
+			TestCases: []models.TestCase{
+				{
+					Input:          "",
+					ExpectedOutput: "true\n",
+					Description:    "Should find digits",
+					Hidden:         false,
+				},
+			},
+			Order: 29,
+		},
+		{
+			ID:            "030",
+			Title:         "Sort Integers",
+			Description:   "Sort a slice of integers using sort package",
+			Story:         "📊 Sorting is a common operation in programming!",
+			Difficulty:    models.DifficultyIntermediate,
+			Category:      models.CategoryStructs,
+			XPReward:      70,
+			RequiredLevel: 15,
+			Hints: []string{
+				"Use sort.Ints()",
+				"Sorts in place",
+				"Print sorted slice",
+			},
+			StarterCode: `package main
+
+import (
+	"fmt"
+	"sort"
+)
+
+func main() {
+	numbers := []int{5, 2, 8, 1, 9}
+	// TODO: Sort and print
+	
+}`,
+			Solution: `package main
+
+import (
+	"fmt"
+	"sort"
+)
+
+func main() {
+	numbers := []int{5, 2, 8, 1, 9}
+	sort.Ints(numbers)
+	fmt.Println(numbers)
+}`,
+			TestCases: []models.TestCase{
+				{
+					Input:          "",
+					ExpectedOutput: "[1 2 5 8 9]\n",
+					Description:    "Should sort ascending",
+					Hidden:         false,
+				},
+			},
+			Order: 30,
+		},
 	}
 }
