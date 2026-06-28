@@ -1105,5 +1105,381 @@ func main() {
 			},
 			Order: 25,
 		},
+		{
+			ID:            "026-b",
+			Title:         "Multi-dimensional Arrays",
+			Description:   "Create a 2x3 array and print element at [1][2]",
+			Story:         "🎯 Multi-dimensional arrays store matrix data!",
+			Difficulty:    models.DifficultyNewbie,
+			Category:      models.CategoryBasics,
+			XPReward:      30,
+			RequiredLevel: 11,
+			StarterCode: `package main
+import "fmt"
+func main() {
+	// TODO: Create 2x3 array, set [1][2] = 6, print it
+}`,
+			Solution: `package main
+import "fmt"
+func main() {
+	arr := [2][3]int{{1,2,3},{4,5,6}}
+	fmt.Println(arr[1][2])
+}`,
+			TestCases: []models.TestCase{{Input: "", ExpectedOutput: "6\n", Description: "Should print 6", Hidden: false}},
+			Order:     26,
+		},
+		{
+			ID:            "027-b",
+			Title:         "Nested Maps",
+			Description:   "Create a map of maps to store user scores",
+			Story:         "🗺️ Nested maps handle complex data!",
+			Difficulty:    models.DifficultyNewbie,
+			Category:      models.CategoryBasics,
+			XPReward:      35,
+			RequiredLevel: 11,
+			StarterCode: `package main
+import "fmt"
+func main() {
+	// TODO: Create map[string]map[string]int, add user "alice" with score "math": 90
+}`,
+			Solution: `package main
+import "fmt"
+func main() {
+	scores := make(map[string]map[string]int)
+	scores["alice"] = map[string]int{"math": 90}
+	fmt.Println(scores["alice"]["math"])
+}`,
+			TestCases: []models.TestCase{{Input: "", ExpectedOutput: "90\n", Description: "Should print 90", Hidden: false}},
+			Order:     27,
+		},
+		{
+			ID:            "028-b",
+			Title:         "Struct Embedding",
+			Description:   "Embed one struct in another",
+			Story:         "🎁 Embedding promotes composition over inheritance!",
+			Difficulty:    models.DifficultyNewbie,
+			Category:      models.CategoryBasics,
+			XPReward:      40,
+			RequiredLevel: 12,
+			StarterCode: `package main
+import "fmt"
+type Person struct { Name string }
+type Employee struct { Person; ID int }
+func main() {
+	e := Employee{Person{"Alice"}, 123}
+	fmt.Println(e.Name, e.ID)
+}`,
+			Solution: `package main
+import "fmt"
+type Person struct { Name string }
+type Employee struct { Person; ID int }
+func main() {
+	e := Employee{Person{"Alice"}, 123}
+	fmt.Println(e.Name, e.ID)
+}`,
+			TestCases: []models.TestCase{{Input: "", ExpectedOutput: "Alice 123\n", Description: "Should print name and ID", Hidden: false}},
+			Order:     28,
+		},
+		{
+			ID:            "029-b",
+			Title:         "String Concatenation",
+			Description:   "Concatenate strings efficiently",
+			Story:         "➕ String concatenation builds text!",
+			Difficulty:    models.DifficultyNewbie,
+			Category:      models.CategoryBasics,
+			XPReward:      20,
+			RequiredLevel: 12,
+			StarterCode: `package main
+import "fmt"
+func main() {
+	s1, s2 := "Hello", "World"
+	// TODO: Concatenate and print
+}`,
+			Solution: `package main
+import "fmt"
+func main() {
+	s1, s2 := "Hello", "World"
+	fmt.Println(s1 + " " + s2)
+}`,
+			TestCases: []models.TestCase{{Input: "", ExpectedOutput: "Hello World\n", Description: "Should concatenate", Hidden: false}},
+			Order:     29,
+		},
+		{
+			ID:            "030-b",
+			Title:         "String Contains",
+			Description:   "Check if string contains substring",
+			Story:         "🔍 String searching is essential!",
+			Difficulty:    models.DifficultyNewbie,
+			Category:      models.CategoryBasics,
+			XPReward:      25,
+			RequiredLevel: 13,
+			StarterCode: `package main
+import ("fmt"; "strings")
+func main() {
+	text := "Hello World"
+	// TODO: Check if contains "World", print true/false
+}`,
+			Solution: `package main
+import ("fmt"; "strings")
+func main() {
+	text := "Hello World"
+	fmt.Println(strings.Contains(text, "World"))
+}`,
+			TestCases: []models.TestCase{{Input: "", ExpectedOutput: "true\n", Description: "Should find substring", Hidden: false}},
+			Order:     30,
+		},
+		{
+			ID:            "031-b",
+			Title:         "String Builder",
+			Description:   "Use strings.Builder for efficient concatenation",
+			Story:         "🏗️ Builder is faster for multiple concatenations!",
+			Difficulty:    models.DifficultyNewbie,
+			Category:      models.CategoryBasics,
+			XPReward:      35,
+			RequiredLevel: 13,
+			StarterCode: `package main
+import ("fmt"; "strings")
+func main() {
+	var b strings.Builder
+	// TODO: Write "Go", "Lang", print result
+}`,
+			Solution: `package main
+import ("fmt"; "strings")
+func main() {
+	var b strings.Builder
+	b.WriteString("Go")
+	b.WriteString("Lang")
+	fmt.Println(b.String())
+}`,
+			TestCases: []models.TestCase{{Input: "", ExpectedOutput: "GoLang\n", Description: "Should build string", Hidden: false}},
+			Order:     31,
+		},
+		{
+			ID:            "032-b",
+			Title:         "Zero Values",
+			Description:   "Print zero values of different types",
+			Story:         "0️⃣ Understanding zero values prevents bugs!",
+			Difficulty:    models.DifficultyNewbie,
+			Category:      models.CategoryBasics,
+			XPReward:      20,
+			RequiredLevel: 14,
+			StarterCode: `package main
+import "fmt"
+func main() {
+	var i int; var s string; var b bool
+	fmt.Println(i, s, b)
+}`,
+			Solution: `package main
+import "fmt"
+func main() {
+	var i int; var s string; var b bool
+	fmt.Println(i, s, b)
+}`,
+			TestCases: []models.TestCase{{Input: "", ExpectedOutput: "0  false\n", Description: "Should print zero values", Hidden: false}},
+			Order:     32,
+		},
+		{
+			ID:            "033-b",
+			Title:         "Variable Scope",
+			Description:   "Understand block scope",
+			Story:         "📦 Scope determines variable visibility!",
+			Difficulty:    models.DifficultyNewbie,
+			Category:      models.CategoryBasics,
+			XPReward:      25,
+			RequiredLevel: 14,
+			StarterCode: `package main
+import "fmt"
+func main() {
+	x := 1
+	{ x := 2; fmt.Println(x) }
+	fmt.Println(x)
+}`,
+			Solution: `package main
+import "fmt"
+func main() {
+	x := 1
+	{ x := 2; fmt.Println(x) }
+	fmt.Println(x)
+}`,
+			TestCases: []models.TestCase{{Input: "", ExpectedOutput: "2\n1\n", Description: "Should show scope", Hidden: false}},
+			Order:     33,
+		},
+		{
+			ID:            "034-b",
+			Title:         "Nested Loops",
+			Description:   "Print multiplication table using nested loops",
+			Story:         "🔄 Nested loops handle 2D iteration!",
+			Difficulty:    models.DifficultyNewbie,
+			Category:      models.CategoryBasics,
+			XPReward:      30,
+			RequiredLevel: 15,
+			StarterCode: `package main
+import "fmt"
+func main() {
+	// TODO: Print 2x2 multiplication table
+}`,
+			Solution: `package main
+import "fmt"
+func main() {
+	for i := 1; i <= 2; i++ {
+		for j := 1; j <= 2; j++ {
+			fmt.Print(i*j, " ")
+		}
+		fmt.Println()
+	}
+}`,
+			TestCases: []models.TestCase{{Input: "", ExpectedOutput: "1 2 \n2 4 \n", Description: "Should print table", Hidden: false}},
+			Order:     34,
+		},
+		{
+			ID:            "035-b",
+			Title:         "Loop Patterns",
+			Description:   "Use different loop patterns",
+			Story:         "🔁 Go has flexible loop syntax!",
+			Difficulty:    models.DifficultyNewbie,
+			Category:      models.CategoryBasics,
+			XPReward:      25,
+			RequiredLevel: 15,
+			StarterCode: `package main
+import "fmt"
+func main() {
+	i := 0
+	for i < 3 { fmt.Println(i); i++ }
+}`,
+			Solution: `package main
+import "fmt"
+func main() {
+	i := 0
+	for i < 3 { fmt.Println(i); i++ }
+}`,
+			TestCases: []models.TestCase{{Input: "", ExpectedOutput: "0\n1\n2\n", Description: "Should loop", Hidden: false}},
+			Order:     35,
+		},
+		{
+			ID:            "036-b",
+			Title:         "Early Returns",
+			Description:   "Use early returns for cleaner code",
+			Story:         "↩️ Early returns improve readability!",
+			Difficulty:    models.DifficultyNewbie,
+			Category:      models.CategoryBasics,
+			XPReward:      30,
+			RequiredLevel: 16,
+			StarterCode: `package main
+import "fmt"
+func check(n int) string {
+	if n < 0 { return "negative" }
+	return "positive"
+}
+func main() { fmt.Println(check(5)) }`,
+			Solution: `package main
+import "fmt"
+func check(n int) string {
+	if n < 0 { return "negative" }
+	return "positive"
+}
+func main() { fmt.Println(check(5)) }`,
+			TestCases: []models.TestCase{{Input: "", ExpectedOutput: "positive\n", Description: "Should return early", Hidden: false}},
+			Order:     36,
+		},
+		{
+			ID:            "037-b",
+			Title:         "Function as Value",
+			Description:   "Assign function to variable",
+			Story:         "🎯 Functions are first-class values!",
+			Difficulty:    models.DifficultyNewbie,
+			Category:      models.CategoryBasics,
+			XPReward:      35,
+			RequiredLevel: 16,
+			StarterCode: `package main
+import "fmt"
+func main() {
+	add := func(a, b int) int { return a + b }
+	fmt.Println(add(2, 3))
+}`,
+			Solution: `package main
+import "fmt"
+func main() {
+	add := func(a, b int) int { return a + b }
+	fmt.Println(add(2, 3))
+}`,
+			TestCases: []models.TestCase{{Input: "", ExpectedOutput: "5\n", Description: "Should call function", Hidden: false}},
+			Order:     37,
+		},
+		{
+			ID:            "038-b",
+			Title:         "Higher-Order Functions",
+			Description:   "Pass function as parameter",
+			Story:         "🎓 Higher-order functions enable powerful patterns!",
+			Difficulty:    models.DifficultyNewbie,
+			Category:      models.CategoryBasics,
+			XPReward:      40,
+			RequiredLevel: 17,
+			StarterCode: `package main
+import "fmt"
+func apply(f func(int) int, v int) int { return f(v) }
+func main() {
+	double := func(n int) int { return n * 2 }
+	fmt.Println(apply(double, 5))
+}`,
+			Solution: `package main
+import "fmt"
+func apply(f func(int) int, v int) int { return f(v) }
+func main() {
+	double := func(n int) int { return n * 2 }
+	fmt.Println(apply(double, 5))
+}`,
+			TestCases: []models.TestCase{{Input: "", ExpectedOutput: "10\n", Description: "Should apply function", Hidden: false}},
+			Order:     38,
+		},
+		{
+			ID:            "039-b",
+			Title:         "Bitwise Operators",
+			Description:   "Use bitwise AND operation",
+			Story:         "⚡ Bitwise ops are fast and powerful!",
+			Difficulty:    models.DifficultyNewbie,
+			Category:      models.CategoryBasics,
+			XPReward:      30,
+			RequiredLevel: 17,
+			StarterCode: `package main
+import "fmt"
+func main() {
+	a, b := 12, 10
+	fmt.Println(a & b)
+}`,
+			Solution: `package main
+import "fmt"
+func main() {
+	a, b := 12, 10
+	fmt.Println(a & b)
+}`,
+			TestCases: []models.TestCase{{Input: "", ExpectedOutput: "8\n", Description: "Should AND bits", Hidden: false}},
+			Order:     39,
+		},
+		{
+			ID:            "040-b",
+			Title:         "Type Aliases",
+			Description:   "Create type alias for clarity",
+			Story:         "📛 Type aliases improve code readability!",
+			Difficulty:    models.DifficultyNewbie,
+			Category:      models.CategoryBasics,
+			XPReward:      25,
+			RequiredLevel: 18,
+			StarterCode: `package main
+import "fmt"
+type UserID int
+func main() {
+	var id UserID = 123
+	fmt.Println(id)
+}`,
+			Solution: `package main
+import "fmt"
+type UserID int
+func main() {
+	var id UserID = 123
+	fmt.Println(id)
+}`,
+			TestCases: []models.TestCase{{Input: "", ExpectedOutput: "123\n", Description: "Should use alias", Hidden: false}},
+			Order:     40,
+		},
 	}
 }
