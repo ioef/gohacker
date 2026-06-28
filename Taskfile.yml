@@ -62,11 +62,9 @@ tasks:
       - node_modules/**
 
   frontend:build:
-    desc: Build frontend for production
-    dir: "{{.FRONTEND_DIR}}"
-    deps: [frontend:install]
+    desc: Build frontend (verify static HTML exists)
     cmds:
-      - npm run build
+      - ./scripts/build-frontend.sh
 
   frontend:dev:
     desc: Run frontend development server
