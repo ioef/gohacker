@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoHacker - Learn Go by Hacking</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+            color: #00ff88;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        h1 {
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px #00ff88;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #00ff88; }
+            to { text-shadow: 0 0 20px #00ff88, 0 0 40px #00ff88; }
+        }
+        .page { display: none; }
+        .page.active { display: block; animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        nav {
+            background: rgba(0, 255, 136, 0.1);
+            border: 2px solid #00ff88;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 30px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        nav button {
+            background: linear-gradient(135deg, #00ff88 0%, #00d9ff 100%);
+            color: #0a0e27;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        nav button:hover { transform: scale(1.05); box-shadow: 0 0 15px #00ff88; }
+        
+        .form-group {
+            margin-bottom: 20px;
+            background: rgba(0, 217, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #00d9ff;
+        }
+        label { display: block; margin-bottom: 5px; color: #00d9ff; }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            background: #1a1f3a;
+            border: 1px solid #00ff88;
+            border-radius: 5px;
+            color: #00ff88;
+            font-family: 'Courier New', monospace;
+        }
+        button {
+            background: linear-gradient(135deg, #00ff88 0%, #00d9ff 100%);
+            color: #0a0e27;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: all 0.3s;
+        }
+        button:hover { transform: scale(1.05); box-shadow: 0 0 20px #00ff88; }
+        
+        .challenge-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .challenge-card {
+            background: rgba(0, 255, 136, 0.1);
+            border: 2px solid #00ff88;
+            border-radius: 10px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .challenge-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 255, 136, 0.3);
+        }
+        .challenge-card h3 { color: #00d9ff; margin-bottom: 10px; }
+        .difficulty {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+        .difficulty.newbie { background: #00ff88; color: #0a0e27; }
+        .difficulty.intermediate { background: #ffd700; color: #0a0e27; }
+        .difficulty.advanced { background: #ff006e; color: #fff; }
+        
+        textarea.code-editor {
+            font-family: 'Courier New', monospace;
+            min-height: 300px;
+            font-size: 14px;
+        }
+        
+        .message {
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        .message.success { background: rgba(0, 255, 136, 0.2); border: 1px solid #00ff88; }
+        .message.error { background: rgba(255, 0, 110, 0.2); border: 1px solid #ff006e; }
+        
+        .user-info {
+            background: rgba(0, 255, 136, 0.1);
+            border: 2px solid #00ff88;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .user-info h2 { color: #00d9ff; margin-bottom: 15px; }
+        .stat { display: inline-block; margin-right: 20px; }
+        .stat strong { color: #00ff88; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 GoHacker</h1>
+        
+        <nav id="nav" style="display:none;">
+            <button onclick="showPage('challenges')">Challenges</button>
+            <button onclick="showPage('progress')">Progress</button>
+            <button onclick="logout()">Logout</button>
+        </nav>
+        
+        <div id="login-page" class="page active">
+            <div class="form-group">
+                <h2 style="color: #00d9ff; margin-bottom: 20px;">Login / Register</h2>
+                <label>Username</label>
+                <input type="text" id="login-username" placeholder="Enter username">
+                
+                <label style="margin-top: 15px;">Email (for registration)</label>
+                <input type="email" id="login-email" placeholder="Enter email">
+                
+                <label style="margin-top: 15px;">Password</label>
+                <input type="password" id="login-password" placeholder="Enter password">
+                
+                <div style="margin-top: 20px;">
+                    <button onclick="register()">Register</button>
+                    <button onclick="login()" style="margin-left: 10px;">Login</button>
+                </div>
+                
+                <div id="login-message"></div>
+            </div>
+        </div>
+        
+        <div id="challenges-page" class="page">
+            <div class="user-info" id="user-info"></div>
+            <h2 style="color: #00d9ff; margin-bottom: 20px;">Available Challenges</h2>
+            <div id="challenge-list" class="challenge-list"></div>
+        </div>
+        
+        <div id="challenge-detail-page" class="page">
+            <button onclick="showPage('challenges')" style="margin-bottom: 20px;">← Back to Challenges</button>
+            <div id="challenge-detail"></div>
+        </div>
+        
+        <div id="progress-page" class="page">
+            <h2 style="color: #00d9ff; margin-bottom: 20px;">Your Progress</h2>
+            <div id="progress-content"></div>
+        </div>
+    </div>
+    
+    <script>
+        const API_BASE = 'http://localhost:8080';
+        let token = localStorage.getItem('token');
+        
+        function showPage(pageName) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageName + '-page').classList.add('active');
+            
+            if (pageName === 'challenges') loadChallenges();
+            if (pageName === 'progress') loadProgress();
+        }
+        
+        async function register() {
+            const username = document.getElementById('login-username').value;
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            try {
+                const response = await fetch(API_BASE + '/api/auth/register', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({username, email, password})
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showMessage('login-message', 'Registration successful! Logging you in...', 'success');
+                    token = data.token;
+                    localStorage.setItem('token', token);
+                    setTimeout(() => {
+                        document.getElementById('nav').style.display = 'flex';
+                        showPage('challenges');
+                    }, 1000);
+                } else {
+                    showMessage('login-message', data.error || 'Registration failed', 'error');
+                }
+            } catch (error) {
+                showMessage('login-message', 'Error: ' + error.message, 'error');
+            }
+        }
+        
+        async function login() {
+            const username = document.getElementById('login-username').value;
+            const password = document.getElementById('login-password').value;
+            
+            try {
+                const response = await fetch(API_BASE + '/api/auth/login', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({username, password})
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showMessage('login-message', 'Login successful!', 'success');
+                    token = data.token;
+                    localStorage.setItem('token', token);
+                    setTimeout(() => {
+                        document.getElementById('nav').style.display = 'flex';
+                        showPage('challenges');
+                    }, 1000);
+                } else {
+                    showMessage('login-message', data.error || 'Login failed', 'error');
+                }
+            } catch (error) {
+                showMessage('login-message', 'Error: ' + error.message, 'error');
+            }
+        }
+        
+        function logout() {
+            localStorage.removeItem('token');
+            token = null;
+            document.getElementById('nav').style.display = 'none';
+            showPage('login');
+        }
+        
+        async function loadChallenges() {
+            try {
+                const response = await fetch(API_BASE + '/api/challenges', {
+                    headers: {'Authorization': 'Bearer ' + token}
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Failed to fetch challenges');
+                }
+                
+                const data = await response.json();
+                console.log('Loaded challenges data:', data);
+                
+                const challenges = Array.isArray(data) ? data : (data.challenges || []);
+                
+                if (!challenges || challenges.length === 0) {
+                    document.getElementById('challenge-list').innerHTML = '<p>No challenges available</p>';
+                    return;
+                }
+                
+                const listHtml = challenges.map(c => `
+                    <div class="challenge-card" onclick="loadChallenge('${c.id}')">
+                        <h3>${c.title}</h3>
+                        <p>${c.description}</p>
+                        <span class="difficulty ${c.difficulty}">${c.difficulty.toUpperCase()}</span>
+                        <div style="margin-top: 10px; color: #00d9ff;">
+                            XP: ${c.xp_reward} | Category: ${c.category}
+                        </div>
+                    </div>
+                `).join('');
+                
+                document.getElementById('challenge-list').innerHTML = listHtml;
+                
+                try {
+                    const userResponse = await fetch(API_BASE + '/api/auth/me', {
+                        headers: {'Authorization': 'Bearer ' + token}
+                    });
+                    
+                    if (userResponse.ok) {
+                        const user = await userResponse.json();
+                        document.getElementById('user-info').innerHTML = `
+                            <h2>Welcome, ${user.username}!</h2>
+                            <div class="stat"><strong>Level:</strong> ${user.level}</div>
+                            <div class="stat"><strong>XP:</strong> ${user.xp}/${user.xp_to_next_level}</div>
+                            <div class="stat"><strong>Total XP:</strong> ${user.total_xp}</div>
+                            <div class="stat"><strong>Rank:</strong> ${user.rank}</div>
+                        `;
+                    } else {
+                        document.getElementById('user-info').innerHTML = '<h2>Welcome!</h2>';
+                    }
+                } catch (userError) {
+                    console.error('Error loading user info:', userError);
+                    document.getElementById('user-info').innerHTML = '<h2>Welcome!</h2>';
+                }
+            } catch (error) {
+                console.error('Error loading challenges:', error);
+                document.getElementById('challenge-list').innerHTML = `
+                    <div class="message error">
+                        <h3>Error Loading Challenges</h3>
+                        <p>${error.message}</p>
+                        <p>Please try refreshing the page or logging out and back in.</p>
+                    </div>
+                `;
+            }
+        }
+        
+        async function loadChallenge(id) {
+            try {
+                const response = await fetch(API_BASE + `/api/challenges/${id}`, {
+                    headers: {'Authorization': 'Bearer ' + token}
+                });
+                
+                const challenge = await response.json();
+                console.log('Challenge detail:', challenge);
+                
+                document.getElementById('challenge-detail').innerHTML = `
+                    <div class="form-group">
+                        <h2 style="color: #00d9ff;">${challenge.title || 'Challenge'}</h2>
+                        <p style="margin: 15px 0;">${challenge.description || ''}</p>
+                        <div style="margin: 15px 0;">
+                            <span class="difficulty ${challenge.difficulty}">${(challenge.difficulty || 'newbie').toUpperCase()}</span>
+                            <span style="margin-left: 15px; color: #00d9ff;">XP Reward: ${challenge.xp_reward || challenge.XPReward || 0}</span>
+                        </div>
+                        
+                        ${challenge.hint || challenge.Hint ? `
+                            <h3 style="color: #00ff88; margin-top: 20px;">Mission Brief:</h3>
+                            <p style="margin: 10px 0;">${challenge.hint || challenge.Hint}</p>
+                        ` : ''}
+                        
+                        ${challenge.expected_output || challenge.ExpectedOutput ? `
+                            <h3 style="color: #00ff88; margin-top: 20px;">Expected Output:</h3>
+                            <pre style="background: #1a1f3a; padding: 10px; border-radius: 5px;">${challenge.expected_output || challenge.ExpectedOutput}</pre>
+                        ` : ''}
+                        
+                        <h3 style="color: #00ff88; margin-top: 20px;">Your Code:</h3>
+                        <textarea class="code-editor" id="code-input" placeholder="Write your Go code here...">${challenge.starter_code || challenge.StarterCode || ''}</textarea>
+                        
+                        <button onclick="executeCode('${challenge.id}')" style="margin-top: 15px;">Execute Code</button>
+                        
+                        <div id="execution-result"></div>
+                    </div>
+                `;
+                
+                showPage('challenge-detail');
+            } catch (error) {
+                console.error('Error loading challenge:', error);
+            }
+        }
+        
+        async function executeCode(challengeId) {
+            const code = document.getElementById('code-input').value;
+            
+            try {
+                const response = await fetch(API_BASE + `/api/challenges/${challengeId}/execute`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'Bearer ' + token,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({code})
+                });
+                
+                const result = await response.json();
+                console.log('Execution result:', result);
+                
+                let html = '';
+                if (result.success) {
+                    html = `
+                        <div class="message success">
+                            <h3>✅ Success!</h3>
+                            <p>${result.message || 'Challenge completed!'}</p>
+                            <p><strong>XP Earned:</strong> ${result.xp_earned || 0}</p>
+                            ${result.level_up ? '<p><strong>🎉 LEVEL UP!</strong></p>' : ''}
+                            ${result.achievements_unlocked && result.achievements_unlocked.length > 0 ? 
+                                '<p><strong>🏆 Achievements Unlocked:</strong> ' + result.achievements_unlocked.join(', ') + '</p>' : ''}
+                            ${result.output ? '<pre style="margin-top: 10px; background: #1a1f3a; padding: 10px; border-radius: 5px;">' + result.output + '</pre>' : ''}
+                        </div>
+                    `;
+                } else {
+                    html = `
+                        <div class="message error">
+                            <h3>❌ Failed</h3>
+                            <p>${result.message || 'Challenge failed'}</p>
+                            ${result.output ? '<pre style="margin-top: 10px; background: #1a1f3a; padding: 10px; border-radius: 5px; color: #ff006e;">' + result.output + '</pre>' : ''}
+                            ${result.error ? '<pre style="margin-top: 10px; background: #1a1f3a; padding: 10px; border-radius: 5px; color: #ff006e;">' + result.error + '</pre>' : ''}
+                        </div>
+                    `;
+                }
+                
+                document.getElementById('execution-result').innerHTML = html;
+            } catch (error) {
+                console.error('Execution error:', error);
+                document.getElementById('execution-result').innerHTML = `
+                    <div class="message error">
+                        <h3>Error</h3>
+                        <p>${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+        
+        async function loadProgress() {
+            try {
+                const response = await fetch(API_BASE + '/api/progress', {
+                    headers: {'Authorization': 'Bearer ' + token}
+                });
+                
+                const progress = await response.json();
+                
+                document.getElementById('progress-content').innerHTML = `
+                    <div class="form-group">
+                        <h3 style="color: #00ff88;">Statistics</h3>
+                        <p><strong>Challenges Completed:</strong> ${progress.statistics.total_challenges_completed}</p>
+                        <p><strong>Total XP Earned:</strong> ${progress.statistics.total_xp_earned}</p>
+                        <p><strong>Achievements Unlocked:</strong> ${progress.unlocked_achievements.length}</p>
+                    </div>
+                    
+                    <div class="form-group">
+                        <h3 style="color: #00ff88;">Achievements</h3>
+                        ${progress.unlocked_achievements.map(a => `
+                            <div style="margin: 10px 0; padding: 10px; background: rgba(0, 255, 136, 0.1); border-radius: 5px;">
+                                <strong>${a}</strong>
+                            </div>
+                        `).join('') || '<p>No achievements yet. Keep hacking!</p>'}
+                    </div>
+                `;
+            } catch (error) {
+                console.error('Error loading progress:', error);
+            }
+        }
+        
+        function showMessage(elementId, message, type) {
+            document.getElementById(elementId).innerHTML = `
+                <div class="message ${type}">${message}</div>
+            `;
+        }
+        
+        if (token) {
+            document.getElementById('nav').style.display = 'flex';
+            showPage('challenges');
+        }
+    </script>
+</body>
+</html>
