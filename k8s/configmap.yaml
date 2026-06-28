@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gohacker-config
+  namespace: gohacker
+  labels:
+    app: gohacker
+data:
+  SERVER_PORT: "8080"
+  SERVER_HOST: "0.0.0.0"
+  GIN_MODE: "release"

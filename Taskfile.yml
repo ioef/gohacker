@@ -1,0 +1,203 @@
+version: '3'
+
+vars:
+  BACKEND_DIR: backend
+  FRONTEND_DIR: frontend
+  DOCKER_IMAGE: gohacker
+  DOCKER_TAG: latest
+
+tasks:
+  # Backend tasks
+  backend:build:
+    desc: Build the backend binary
+    dir: "{{.BACKEND_DIR}}"
+    cmds:
+      - go build -o gohacker main.go
+    sources:
+      - "**/*.go"
+    generates:
+      - gohacker
+
+  backend:test:
+    desc: Run backend unit tests
+    dir: "{{.BACKEND_DIR}}"
+    cmds:
+      - go test -v -cover ./...
+
+  backend:lint:
+    desc: Lint backend code
+    dir: "{{.BACKEND_DIR}}"
+    cmds:
+      - go fmt ./...
+      - go vet ./...
+      - |
+        if command -v golangci-lint &> /dev/null; then
+          golangci-lint run
+        else
+          echo "⚠️  golangci-lint not installed, skipping"
+        fi
+
+  backend:run:
+    desc: Run the backend server
+    dir: "{{.BACKEND_DIR}}"
+    cmds:
+      - go run main.go
+
+  backend:clean:
+    desc: Clean backend build artifacts
+    dir: "{{.BACKEND_DIR}}"
+    cmds:
+      - rm -f gohacker
+      - rm -rf data/
+
+  # Frontend tasks
+  frontend:install:
+    desc: Install frontend dependencies
+    dir: "{{.FRONTEND_DIR}}"
+    cmds:
+      - npm install
+    sources:
+      - package.json
+    generates:
+      - node_modules/**
+
+  frontend:build:
+    desc: Build frontend for production
+    dir: "{{.FRONTEND_DIR}}"
+    deps: [frontend:install]
+    cmds:
+      - npm run build
+
+  frontend:dev:
+    desc: Run frontend development server
+    dir: "{{.FRONTEND_DIR}}"
+    deps: [frontend:install]
+    cmds:
+      - npm run dev
+
+  frontend:lint:
+    desc: Lint frontend code
+    dir: "{{.FRONTEND_DIR}}"
+    cmds:
+      - npm run lint || echo "⚠️  Lint script not configured"
+
+  frontend:clean:
+    desc: Clean frontend build artifacts
+    dir: "{{.FRONTEND_DIR}}"
+    cmds:
+      - rm -rf dist/
+      - rm -rf node_modules/
+
+  # Combined tasks
+  build:
+    desc: Build backend (frontend requires Node.js)
+    cmds:
+      - task: backend:build
+
+  test:
+    desc: Run all tests
+    cmds:
+      - task: backend:test
+
+  lint:
+    desc: Lint all code
+    cmds:
+      - task: backend:lint
+      - task: frontend:lint
+
+  run:
+    desc: Start everything with docker-compose and show logs
+    cmds:
+      - task: up
+      - task: logs
+
+  clean:
+    desc: Clean all build artifacts
+    cmds:
+      - task: backend:clean
+      - task: frontend:clean
+
+  # Docker Compose tasks
+  up:
+    desc: Start all services with docker-compose (HTTPS on port 3000)
+    cmds:
+      - ./scripts/start.sh
+
+  down:
+    desc: Stop all services
+    cmds:
+      - docker-compose down
+
+  logs:
+    desc: View logs from all services
+    cmds:
+      - docker-compose logs -f
+
+  restart:
+    desc: Restart all services
+    cmds:
+      - docker-compose restart
+
+  # Docker tasks
+  docker:build:
+    desc: Build Docker images
+    cmds:
+      - docker-compose build
+
+  docker:rebuild:
+    desc: Rebuild and restart services
+    cmds:
+      - docker-compose down
+      - docker-compose build --no-cache
+      - docker-compose up -d
+
+  docker:clean:
+    desc: Clean Docker resources
+    cmds:
+      - docker-compose down -v
+      - docker system prune -f
+
+  # Kubernetes tasks
+  k8s:deploy:
+    desc: Deploy to Kubernetes
+    cmds:
+      - kubectl apply -f k8s/
+
+  k8s:delete:
+    desc: Delete Kubernetes deployment
+    cmds:
+      - kubectl delete -f k8s/
+
+  k8s:status:
+    desc: Check Kubernetes deployment status
+    cmds:
+      - kubectl get pods -l app=gohacker
+      - kubectl get services -l app=gohacker
+
+  k8s:logs:
+    desc: View Kubernetes logs
+    cmds:
+      - kubectl logs -l app=gohacker --tail=100 -f
+
+  # Development helpers
+  dev:
+    desc: Start development environment
+    cmds:
+      - echo "🎮 Starting GoHacker Development Environment"
+      - echo ""
+      - echo "Open two terminals and run:"
+      - echo "  Terminal 1 - task backend:run"
+      - echo "  Terminal 2 - task frontend:dev"
+      - echo ""
+      - echo "Then visit http://localhost:3000"
+
+  install:
+    desc: Install all dependencies
+    cmds:
+      - task: frontend:install
+      - cd {{.BACKEND_DIR}} && go mod download
+
+  default:
+    desc: Show available tasks
+    cmds:
+      - task --list

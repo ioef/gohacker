@@ -1,0 +1,30 @@
+# Backend
+backend/gohacker
+backend/data/
+backend/**/*_test.go
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# Git
+.git/
+.gitignore
+
+# Documentation
+*.md
+!README.md
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Misc
+*.log
+tmp/
+temp/

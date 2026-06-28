@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: gohacker
+  labels:
+    name: gohacker
+    app: gohacker
