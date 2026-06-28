@@ -998,5 +998,411 @@ func main() {
 			},
 			Order: 30,
 		},
+		{
+			ID:            "031",
+			Title:         "Interface Composition",
+			Description:   "Compose interfaces from smaller interfaces",
+			Story:         "🧩 Interface composition creates powerful abstractions!",
+			Difficulty:    models.DifficultyIntermediate,
+			Category:      models.CategoryStructs,
+			XPReward:      90,
+			RequiredLevel: 16,
+			StarterCode: `package main
+import "fmt"
+type Reader interface { Read() string }
+type Writer interface { Write(string) }
+type ReadWriter interface { Reader; Writer }
+type File struct{}
+func (f File) Read() string { return "data" }
+func (f File) Write(s string) {}
+func main() {
+	var rw ReadWriter = File{}
+	fmt.Println(rw.Read())
+}`,
+			Solution: `package main
+import "fmt"
+type Reader interface { Read() string }
+type Writer interface { Write(string) }
+type ReadWriter interface { Reader; Writer }
+type File struct{}
+func (f File) Read() string { return "data" }
+func (f File) Write(s string) {}
+func main() {
+	var rw ReadWriter = File{}
+	fmt.Println(rw.Read())
+}`,
+			TestCases: []models.TestCase{{Input: "", ExpectedOutput: "data\n", Description: "Should compose interfaces", Hidden: false}},
+			Order:     31,
+		},
+		{
+			ID:            "032",
+			Title:         "Stringer Interface",
+			Description:   "Implement fmt.Stringer for custom string representation",
+			Story:         "📝 Stringer controls how your types print!",
+			Difficulty:    models.DifficultyIntermediate,
+			Category:      models.CategoryStructs,
+			XPReward:      75,
+			RequiredLevel: 16,
+			StarterCode: `package main
+import "fmt"
+type Point struct { X, Y int }
+func (p Point) String() string { return fmt.Sprintf("(%d,%d)", p.X, p.Y) }
+func main() { fmt.Println(Point{3, 4}) }`,
+			Solution: `package main
+import "fmt"
+type Point struct { X, Y int }
+func (p Point) String() string { return fmt.Sprintf("(%d,%d)", p.X, p.Y) }
+func main() { fmt.Println(Point{3, 4}) }`,
+			TestCases: []models.TestCase{{Input: "", ExpectedOutput: "(3,4)\n", Description: "Should format point", Hidden: false}},
+			Order:     32,
+		},
+		{
+			ID:            "033",
+			Title:         "Error Interface",
+			Description:   "Understand error interface implementation",
+			Story:         "⚠️ Error is just an interface!",
+			Difficulty:    models.DifficultyIntermediate,
+			Category:      models.CategoryStructs,
+			XPReward:      80,
+			RequiredLevel: 17,
+			StarterCode: `package main
+import ("fmt"; "errors")
+func main() {
+	err := errors.New("test error")
+	fmt.Println(err.Error())
+}`,
+			Solution: `package main
+import ("fmt"; "errors")
+func main() {
+	err := errors.New("test error")
+	fmt.Println(err.Error())
+}`,
+			TestCases: []models.TestCase{{Input: "", ExpectedOutput: "test error\n", Description: "Should print error", Hidden: false}},
+			Order:     33,
+		},
+		{
+			ID:            "034",
+			Title:         "Sentinel Errors",
+			Description:   "Use sentinel errors for comparison",
+			Story:         "🚩 Sentinel errors enable error checking!",
+			Difficulty:    models.DifficultyIntermediate,
+			Category:      models.CategoryStructs,
+			XPReward:      85,
+			RequiredLevel: 17,
+			StarterCode: `package main
+import ("fmt"; "errors")
+var ErrNotFound = errors.New("not found")
+func find(id int) error {
+	if id != 1 { return ErrNotFound }
+	return nil
+}
+func main() {
+	err := find(2)
+	if err == ErrNotFound { fmt.Println("not found") }
+}`,
+			Solution: `package main
+import ("fmt"; "errors")
+var ErrNotFound = errors.New("not found")
+func find(id int) error {
+	if id != 1 { return ErrNotFound }
+	return nil
+}
+func main() {
+	err := find(2)
+	if err == ErrNotFound { fmt.Println("not found") }
+}`,
+			TestCases: []models.TestCase{{Input: "", ExpectedOutput: "not found\n", Description: "Should detect sentinel", Hidden: false}},
+			Order:     34,
+		},
+		{
+			ID:            "035",
+			Title:         "errors.Is",
+			Description:   "Use errors.Is for wrapped error checking",
+			Story:         "🔍 errors.Is unwraps error chains!",
+			Difficulty:    models.DifficultyIntermediate,
+			Category:      models.CategoryStructs,
+			XPReward:      90,
+			RequiredLevel: 18,
+			StarterCode: `package main
+import ("fmt"; "errors")
+var ErrBase = errors.New("base")
+func main() {
+	wrapped := fmt.Errorf("wrapped: %w", ErrBase)
+	fmt.Println(errors.Is(wrapped, ErrBase))
+}`,
+			Solution: `package main
+import ("fmt"; "errors")
+var ErrBase = errors.New("base")
+func main() {
+	wrapped := fmt.Errorf("wrapped: %w", ErrBase)
+	fmt.Println(errors.Is(wrapped, ErrBase))
+}`,
+			TestCases: []models.TestCase{{Input: "", ExpectedOutput: "true\n", Description: "Should find base error", Hidden: false}},
+			Order:     35,
+		},
+		{
+			ID:            "036",
+			Title:         "Write File",
+			Description:   "Write data to a file",
+			Story:         "💾 File writing persists data!",
+			Difficulty:    models.DifficultyIntermediate,
+			Category:      models.CategoryStructs,
+			XPReward:      75,
+			RequiredLevel: 18,
+			StarterCode: `package main
+import ("fmt"; "os")
+func main() {
+	os.WriteFile("/tmp/out.txt", []byte("test"), 0644)
+	data, _ := os.ReadFile("/tmp/out.txt")
+	fmt.Println(string(data))
+}`,
+			Solution: `package main
+import ("fmt"; "os")
+func main() {
+	os.WriteFile("/tmp/out.txt", []byte("test"), 0644)
+	data, _ := os.ReadFile("/tmp/out.txt")
+	fmt.Println(string(data))
+}`,
+			TestCases: []models.TestCase{{Input: "", ExpectedOutput: "test\n", Description: "Should write and read", Hidden: false}},
+			Order:     36,
+		},
+		{
+			ID:            "037",
+			Title:         "Buffered I/O",
+			Description:   "Use bufio for efficient I/O",
+			Story:         "⚡ Buffered I/O improves performance!",
+			Difficulty:    models.DifficultyIntermediate,
+			Category:      models.CategoryStructs,
+			XPReward:      85,
+			RequiredLevel: 19,
+			StarterCode: `package main
+import ("fmt"; "strings"; "bufio")
+func main() {
+	r := strings.NewReader("line1\nline2")
+	scanner := bufio.NewScanner(r)
+	scanner.Scan()
+	fmt.Println(scanner.Text())
+}`,
+			Solution: `package main
+import ("fmt"; "strings"; "bufio")
+func main() {
+	r := strings.NewReader("line1\nline2")
+	scanner := bufio.NewScanner(r)
+	scanner.Scan()
+	fmt.Println(scanner.Text())
+}`,
+			TestCases: []models.TestCase{{Input: "", ExpectedOutput: "line1\n", Description: "Should scan line", Hidden: false}},
+			Order:     37,
+		},
+		{
+			ID:            "038",
+			Title:         "File Paths",
+			Description:   "Work with file paths using filepath",
+			Story:         "📁 filepath handles OS-specific paths!",
+			Difficulty:    models.DifficultyIntermediate,
+			Category:      models.CategoryStructs,
+			XPReward:      70,
+			RequiredLevel: 19,
+			StarterCode: `package main
+import ("fmt"; "path/filepath")
+func main() {
+	p := filepath.Join("dir", "file.txt")
+	fmt.Println(filepath.Base(p))
+}`,
+			Solution: `package main
+import ("fmt"; "path/filepath")
+func main() {
+	p := filepath.Join("dir", "file.txt")
+	fmt.Println(filepath.Base(p))
+}`,
+			TestCases: []models.TestCase{{Input: "", ExpectedOutput: "file.txt\n", Description: "Should get basename", Hidden: false}},
+			Order:     38,
+		},
+		{
+			ID:            "039",
+			Title:         "Time Formatting",
+			Description:   "Format time using layout strings",
+			Story:         "🕐 Time formatting uses reference time!",
+			Difficulty:    models.DifficultyIntermediate,
+			Category:      models.CategoryStructs,
+			XPReward:      75,
+			RequiredLevel: 20,
+			StarterCode: `package main
+import ("fmt"; "time")
+func main() {
+	t := time.Date(2024, 1, 1, 0, 0, 0, 0, time.UTC)
+	fmt.Println(t.Format("2006-01-02"))
+}`,
+			Solution: `package main
+import ("fmt"; "time")
+func main() {
+	t := time.Date(2024, 1, 1, 0, 0, 0, 0, time.UTC)
+	fmt.Println(t.Format("2006-01-02"))
+}`,
+			TestCases: []models.TestCase{{Input: "", ExpectedOutput: "2024-01-01\n", Description: "Should format date", Hidden: false}},
+			Order:     39,
+		},
+		{
+			ID:            "040",
+			Title:         "Timers",
+			Description:   "Use time.NewTimer for delayed execution",
+			Story:         "⏲️ Timers schedule future events!",
+			Difficulty:    models.DifficultyIntermediate,
+			Category:      models.CategoryStructs,
+			XPReward:      80,
+			RequiredLevel: 20,
+			StarterCode: `package main
+import ("fmt"; "time")
+func main() {
+	timer := time.NewTimer(10 * time.Millisecond)
+	<-timer.C
+	fmt.Println("done")
+}`,
+			Solution: `package main
+import ("fmt"; "time")
+func main() {
+	timer := time.NewTimer(10 * time.Millisecond)
+	<-timer.C
+	fmt.Println("done")
+}`,
+			TestCases: []models.TestCase{{Input: "", ExpectedOutput: "done\n", Description: "Should wait for timer", Hidden: false}},
+			Order:     40,
+		},
+		{
+			ID:            "041",
+			Title:         "Regex Find",
+			Description:   "Find matches using regular expressions",
+			Story:         "🔎 Regex extracts patterns from text!",
+			Difficulty:    models.DifficultyIntermediate,
+			Category:      models.CategoryStructs,
+			XPReward:      85,
+			RequiredLevel: 21,
+			StarterCode: `package main
+import ("fmt"; "regexp")
+func main() {
+	re := regexp.MustCompile("[0-9]+")
+	fmt.Println(re.FindString("abc123def"))
+}`,
+			Solution: `package main
+import ("fmt"; "regexp")
+func main() {
+	re := regexp.MustCompile("[0-9]+")
+	fmt.Println(re.FindString("abc123def"))
+}`,
+			TestCases: []models.TestCase{{Input: "", ExpectedOutput: "123\n", Description: "Should find digits", Hidden: false}},
+			Order:     41,
+		},
+		{
+			ID:            "042",
+			Title:         "Flag Package",
+			Description:   "Parse command-line flags",
+			Story:         "🚩 Flags make CLIs configurable!",
+			Difficulty:    models.DifficultyIntermediate,
+			Category:      models.CategoryStructs,
+			XPReward:      75,
+			RequiredLevel: 21,
+			StarterCode: `package main
+import ("fmt"; "flag")
+func main() {
+	name := flag.String("name", "default", "a name")
+	flag.Parse()
+	fmt.Println(*name)
+}`,
+			Solution: `package main
+import ("fmt"; "flag")
+func main() {
+	name := flag.String("name", "default", "a name")
+	flag.Parse()
+	fmt.Println(*name)
+}`,
+			TestCases: []models.TestCase{{Input: "", ExpectedOutput: "default\n", Description: "Should use default", Hidden: false}},
+			Order:     42,
+		},
+		{
+			ID:            "043",
+			Title:         "fmt Verbs",
+			Description:   "Master fmt formatting verbs",
+			Story:         "📝 Format verbs control output!",
+			Difficulty:    models.DifficultyIntermediate,
+			Category:      models.CategoryStructs,
+			XPReward:      70,
+			RequiredLevel: 22,
+			StarterCode: `package main
+import "fmt"
+func main() {
+	fmt.Printf("%T %v\n", 42, 42)
+}`,
+			Solution: `package main
+import "fmt"
+func main() {
+	fmt.Printf("%T %v\n", 42, 42)
+}`,
+			TestCases: []models.TestCase{{Input: "", ExpectedOutput: "int 42\n", Description: "Should print type and value", Hidden: false}},
+			Order:     43,
+		},
+		{
+			ID:            "044",
+			Title:         "Sort Custom Types",
+			Description:   "Implement sort.Interface for custom sorting",
+			Story:         "📊 Custom sorting gives full control!",
+			Difficulty:    models.DifficultyIntermediate,
+			Category:      models.CategoryStructs,
+			XPReward:      95,
+			RequiredLevel: 22,
+			StarterCode: `package main
+import ("fmt"; "sort")
+type ByLen []string
+func (s ByLen) Len() int { return len(s) }
+func (s ByLen) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+func (s ByLen) Less(i, j int) bool { return len(s[i]) < len(s[j]) }
+func main() {
+	words := []string{"aaa", "b", "cc"}
+	sort.Sort(ByLen(words))
+	fmt.Println(words)
+}`,
+			Solution: `package main
+import ("fmt"; "sort")
+type ByLen []string
+func (s ByLen) Len() int { return len(s) }
+func (s ByLen) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+func (s ByLen) Less(i, j int) bool { return len(s[i]) < len(s[j]) }
+func main() {
+	words := []string{"aaa", "b", "cc"}
+	sort.Sort(ByLen(words))
+	fmt.Println(words)
+}`,
+			TestCases: []models.TestCase{{Input: "", ExpectedOutput: "[b cc aaa]\n", Description: "Should sort by length", Hidden: false}},
+			Order:     44,
+		},
+		{
+			ID:            "045",
+			Title:         "JSON Decoding",
+			Description:   "Decode JSON into structs",
+			Story:         "📥 JSON decoding parses API responses!",
+			Difficulty:    models.DifficultyIntermediate,
+			Category:      models.CategoryStructs,
+			XPReward:      85,
+			RequiredLevel: 23,
+			StarterCode: `package main
+import ("fmt"; "encoding/json")
+type User struct { Name string; Age int }
+func main() {
+	data := []byte("{\"Name\":\"Bob\",\"Age\":25}")
+	var u User
+	json.Unmarshal(data, &u)
+	fmt.Println(u.Name, u.Age)
+}`,
+			Solution: `package main
+import ("fmt"; "encoding/json")
+type User struct { Name string; Age int }
+func main() {
+	data := []byte("{\"Name\":\"Bob\",\"Age\":25}")
+	var u User
+	json.Unmarshal(data, &u)
+	fmt.Println(u.Name, u.Age)
+}`,
+			TestCases: []models.TestCase{{Input: "", ExpectedOutput: "Bob 25\n", Description: "Should decode JSON", Hidden: false}},
+			Order:     45,
+		},
 	}
 }

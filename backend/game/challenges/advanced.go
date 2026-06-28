@@ -1254,5 +1254,245 @@ func main() {
 			},
 			Order: 35,
 		},
+		{
+			ID:            "036",
+			Title:         "HTTP Client",
+			Description:   "Make HTTP GET request and print response",
+			Story:         "🌐 HTTP clients consume APIs!",
+			Difficulty:    models.DifficultyAdvanced,
+			Category:      models.CategoryConcurrency,
+			XPReward:      200,
+			RequiredLevel: 30,
+			StarterCode: `package main
+import ("fmt"; "net/http"; "io")
+func main() {
+	resp, _ := http.Get("https://httpbin.org/get")
+	defer resp.Body.Close()
+	body, _ := io.ReadAll(resp.Body)
+	fmt.Println(len(body) > 0)
+}`,
+			Solution: `package main
+import ("fmt"; "net/http"; "io")
+func main() {
+	resp, _ := http.Get("https://httpbin.org/get")
+	defer resp.Body.Close()
+	body, _ := io.ReadAll(resp.Body)
+	fmt.Println(len(body) > 0)
+}`,
+			TestCases: []models.TestCase{{Input: "", ExpectedOutput: "true\n", Description: "Should get response", Hidden: false}},
+			Order:     36,
+		},
+		{
+			ID:            "037",
+			Title:         "JSON API Response",
+			Description:   "Parse JSON from HTTP response",
+			Story:         "📡 APIs speak JSON!",
+			Difficulty:    models.DifficultyAdvanced,
+			Category:      models.CategoryConcurrency,
+			XPReward:      210,
+			RequiredLevel: 31,
+			StarterCode: `package main
+import "fmt"
+type Response struct { Status string }
+func main() {
+	r := Response{Status: "ok"}
+	fmt.Println(r.Status)
+}`,
+			Solution: `package main
+import "fmt"
+type Response struct { Status string }
+func main() {
+	r := Response{Status: "ok"}
+	fmt.Println(r.Status)
+}`,
+			TestCases: []models.TestCase{{Input: "", ExpectedOutput: "ok\n", Description: "Should parse response", Hidden: false}},
+			Order:     37,
+		},
+		{
+			ID:            "038",
+			Title:         "Middleware Pattern",
+			Description:   "Create HTTP middleware for logging",
+			Story:         "🔗 Middleware chains request processing!",
+			Difficulty:    models.DifficultyAdvanced,
+			Category:      models.CategoryConcurrency,
+			XPReward:      220,
+			RequiredLevel: 32,
+			StarterCode: `package main
+import ("fmt"; "net/http")
+func logger(next http.HandlerFunc) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		fmt.Println("logged")
+		next(w, r)
+	}
+}
+func handler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "ok")
+}
+func main() {
+	http.HandleFunc("/", logger(handler))
+	fmt.Println("middleware ready")
+}`,
+			Solution: `package main
+import ("fmt"; "net/http")
+func logger(next http.HandlerFunc) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		fmt.Println("logged")
+		next(w, r)
+	}
+}
+func handler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "ok")
+}
+func main() {
+	http.HandleFunc("/", logger(handler))
+	fmt.Println("middleware ready")
+}`,
+			TestCases: []models.TestCase{{Input: "", ExpectedOutput: "middleware ready\n", Description: "Should setup middleware", Hidden: false}},
+			Order:     38,
+		},
+		{
+			ID:            "039",
+			Title:         "Table-Driven Tests",
+			Description:   "Write table-driven test pattern",
+			Story:         "✅ Table tests cover multiple cases efficiently!",
+			Difficulty:    models.DifficultyAdvanced,
+			Category:      models.CategoryConcurrency,
+			XPReward:      200,
+			RequiredLevel: 33,
+			StarterCode: `package main
+import "fmt"
+func add(a, b int) int { return a + b }
+func main() {
+	tests := []struct{ a, b, want int }{
+		{1, 2, 3},
+		{2, 3, 5},
+	}
+	for _, tt := range tests {
+		if got := add(tt.a, tt.b); got == tt.want {
+			fmt.Println("pass")
+		}
+	}
+}`,
+			Solution: `package main
+import "fmt"
+func add(a, b int) int { return a + b }
+func main() {
+	tests := []struct{ a, b, want int }{
+		{1, 2, 3},
+		{2, 3, 5},
+	}
+	for _, tt := range tests {
+		if got := add(tt.a, tt.b); got == tt.want {
+			fmt.Println("pass")
+		}
+	}
+}`,
+			TestCases: []models.TestCase{{Input: "", ExpectedOutput: "pass\npass\n", Description: "Should pass tests", Hidden: false}},
+			Order:     39,
+		},
+		{
+			ID:            "040",
+			Title:         "Benchmarking",
+			Description:   "Understand benchmark pattern",
+			Story:         "⚡ Benchmarks measure performance!",
+			Difficulty:    models.DifficultyAdvanced,
+			Category:      models.CategoryConcurrency,
+			XPReward:      210,
+			RequiredLevel: 34,
+			StarterCode: `package main
+import "fmt"
+func fibonacci(n int) int {
+	if n < 2 { return n }
+	return fibonacci(n-1) + fibonacci(n-2)
+}
+func main() {
+	fmt.Println(fibonacci(10))
+}`,
+			Solution: `package main
+import "fmt"
+func fibonacci(n int) int {
+	if n < 2 { return n }
+	return fibonacci(n-1) + fibonacci(n-2)
+}
+func main() {
+	fmt.Println(fibonacci(10))
+}`,
+			TestCases: []models.TestCase{{Input: "", ExpectedOutput: "55\n", Description: "Should calculate fibonacci", Hidden: false}},
+			Order:     40,
+		},
+		{
+			ID:            "041",
+			Title:         "Context with Timeout",
+			Description:   "Use context.WithTimeout for time-limited operations",
+			Story:         "⏱️ Timeouts prevent hanging operations!",
+			Difficulty:    models.DifficultyAdvanced,
+			Category:      models.CategoryConcurrency,
+			XPReward:      220,
+			RequiredLevel: 35,
+			StarterCode: `package main
+import ("context"; "fmt"; "time")
+func main() {
+	ctx, cancel := context.WithTimeout(context.Background(), 50*time.Millisecond)
+	defer cancel()
+	select {
+	case <-time.After(100 * time.Millisecond):
+		fmt.Println("done")
+	case <-ctx.Done():
+		fmt.Println("timeout")
+	}
+}`,
+			Solution: `package main
+import ("context"; "fmt"; "time")
+func main() {
+	ctx, cancel := context.WithTimeout(context.Background(), 50*time.Millisecond)
+	defer cancel()
+	select {
+	case <-time.After(100 * time.Millisecond):
+		fmt.Println("done")
+	case <-ctx.Done():
+		fmt.Println("timeout")
+	}
+}`,
+			TestCases: []models.TestCase{{Input: "", ExpectedOutput: "timeout\n", Description: "Should timeout", Hidden: false}},
+			Order:     41,
+		},
+		{
+			ID:            "042",
+			Title:         "Graceful Shutdown",
+			Description:   "Implement graceful server shutdown",
+			Story:         "🛑 Graceful shutdown ensures clean exit!",
+			Difficulty:    models.DifficultyAdvanced,
+			Category:      models.CategoryConcurrency,
+			XPReward:      250,
+			RequiredLevel: 36,
+			StarterCode: `package main
+import ("context"; "fmt"; "net/http"; "time")
+func main() {
+	srv := &http.Server{Addr: ":8080"}
+	go func() {
+		srv.ListenAndServe()
+	}()
+	time.Sleep(10 * time.Millisecond)
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+	srv.Shutdown(ctx)
+	fmt.Println("shutdown complete")
+}`,
+			Solution: `package main
+import ("context"; "fmt"; "net/http"; "time")
+func main() {
+	srv := &http.Server{Addr: ":8080"}
+	go func() {
+		srv.ListenAndServe()
+	}()
+	time.Sleep(10 * time.Millisecond)
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+	srv.Shutdown(ctx)
+	fmt.Println("shutdown complete")
+}`,
+			TestCases: []models.TestCase{{Input: "", ExpectedOutput: "shutdown complete\n", Description: "Should shutdown gracefully", Hidden: false}},
+			Order:     42,
+		},
 	}
 }
