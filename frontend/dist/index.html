@@ -93,10 +93,28 @@
             padding: 20px;
             cursor: pointer;
             transition: all 0.3s;
+            position: relative;
         }
         .challenge-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 5px 20px rgba(0, 255, 136, 0.3);
+        }
+        .challenge-card.completed {
+            background: rgba(0, 255, 136, 0.05);
+            border-color: #00ff8866;
+            opacity: 0.7;
+        }
+        .challenge-card.completed::after {
+            content: '✓ COMPLETED';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #00ff88;
+            color: #0a0e27;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8em;
+            font-weight: bold;
         }
         .challenge-card h3 { color: #00d9ff; margin-bottom: 10px; }
         .difficulty {
@@ -283,7 +301,7 @@
                 }
                 
                 const listHtml = challenges.map(c => `
-                    <div class="challenge-card" onclick="loadChallenge('${c.id}')">
+                    <div class="challenge-card ${c.completed ? 'completed' : ''}" onclick="loadChallenge('${c.id}')">
                         <h3>${c.title}</h3>
                         <p>${c.description}</p>
                         <span class="difficulty ${c.difficulty}">${c.difficulty.toUpperCase()}</span>

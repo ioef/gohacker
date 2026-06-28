@@ -161,6 +161,7 @@ func (e *Engine) ExecuteChallenge(userID, challengeID, code string) (*ExecutionR
 		TestsPassed:   testsPassed,
 		TotalTests:    len(challenge.TestCases),
 		ExecutionTime: execResult.Time,
+		FormattedCode: execResult.FormattedCode, // Pass formatted code to frontend
 	}
 
 	// If all tests passed, update progress
@@ -312,6 +313,7 @@ type ExecutionResult struct {
 	XPGained      int    `json:"xp_gained,omitempty"`
 	NewLevel      int    `json:"new_level,omitempty"`
 	ExecutionTime int    `json:"execution_time"` // milliseconds
+	FormattedCode string `json:"formatted_code"` // go fmt formatted code
 }
 
 func getResultMessage(success bool, passed, total int) string {

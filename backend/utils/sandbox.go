@@ -14,10 +14,11 @@ import (
 
 // ExecutionResult represents the result of code execution
 type ExecutionResult struct {
-	Output  string `json:"output"`
-	Error   string `json:"error"`
-	Success bool   `json:"success"`
-	Time    int    `json:"time"` // execution time in milliseconds
+	Output        string `json:"output"`
+	Error         string `json:"error"`
+	Success       bool   `json:"success"`
+	Time          int    `json:"time"`           // execution time in milliseconds
+	FormattedCode string `json:"formatted_code"` // go fmt formatted code
 }
 
 // ExecuteCode safely executes Go code in a sandboxed environment
@@ -41,7 +42,21 @@ func ExecuteCode(code string, timeout time.Duration) (*ExecutionResult, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), timeout)
 	defer cancel()
 
-	// First, try to build the code
+	// First, format the code with go fmt
+	fmtCmd := exec.CommandContext(ctx, "go", "fmt", codeFile)
+	fmtCmd.Dir = tempDir
+	if err := fmtCmd.Run(); err != nil {
+		// If formatting fails, continue anyway (non-critical)
+		// The code might still compile and run
+	}
+
+	// Read the formatted code back (optional, for returning formatted code)
+	formattedCode, readErr := os.ReadFile(codeFile)
+	if readErr == nil {
+		code = string(formattedCode)
+	}
+
+	// Now, try to build the code
 	buildCmd := exec.CommandContext(ctx, "go", "build", "-o", filepath.Join(tempDir, "program"), codeFile)
 	buildCmd.Dir = tempDir
 	var buildOut, buildErr bytes.Buffer
@@ -67,10 +82,11 @@ func ExecuteCode(code string, timeout time.Duration) (*ExecutionResult, error) {
 	err := runCmd.Run()
 
 	result := &ExecutionResult{
-		Output:  runOut.String(),
-		Error:   runErr.String(),
-		Success: err == nil,
-		Time:    int(time.Since(startTime).Milliseconds()),
+		Output:        runOut.String(),
+		Error:         runErr.String(),
+		Success:       err == nil,
+		Time:          int(time.Since(startTime).Milliseconds()),
+		FormattedCode: code, // Return the formatted code
 	}
 
 	// Check if context was cancelled (timeout)
